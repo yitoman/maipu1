@@ -72,6 +72,7 @@ var errorGeolocalizacion = "";
 var onSuccess = function(position) {
     latitudInicial =  position.coords.latitude;
     longitudInicial = position.coords.longitude;
+    success();
 };
 
 // onError Callback receives a PositionError object
@@ -81,21 +82,17 @@ function onError(error) {
     console.log(geolocalizacion);
 }
 
-navigator.geolocation.getCurrentPosition(onSuccess, onError);
+document.addEventListener("deviceready", function(){
+  navigator.geolocation.getCurrentPosition(onSuccess, onError);
+}, false);
 
-function success(position) {
+
+function success() {
 
   var coords;
-  if(errorGeolocalizacion == "")
+  if(errorGeolocalizacion != "")
   {
-    coords = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-  }
-  else
-  {
-    coords = new google.maps.LatLng(latitudInicial, longitudInicial); 
-  }
-  
-  var options = {
+    var options = {
     zoom: 15,
     center: coords,
     mapTypeControl: false,
@@ -103,17 +100,18 @@ function success(position) {
       style: google.maps.NavigationControlStyle.SMALL
     },
     mapTypeId: google.maps.MapTypeId.ROADMAP
-  };
-  map = new google.maps.Map(document.getElementById("map_canvas"), options);
+    };
+    map = new google.maps.Map(document.getElementById("map_canvas"), options);
 
-  var marker = new google.maps.Marker({
-      position: coords,
-      map: map  
-  });
-  markers.push(marker);
-  document.getElementById("sAlrtLocation").value = coords;
-  var coorString = document.getElementById("sAlrtLocation").value;
-  document.getElementById("sAlrtLocation").value = coorString.replace("(","").replace(")","");
+    var marker = new google.maps.Marker({
+        position: coords,
+        map: map  
+    });
+    markers.push(marker);
+    document.getElementById("sAlrtLocation").value = coords;
+    var coorString = document.getElementById("sAlrtLocation").value;
+    document.getElementById("sAlrtLocation").value = coorString.replace("(","").replace(")","");
+  }
   
 
     // This event listener will call addMarker() when the map is clicked.
