@@ -68,7 +68,8 @@ var longitudInicial;
 var errorGeolocalizacion = "";
 
 
-
+$(document).ready(function() {
+  
 var onSuccess = function(position) {
     latitudInicial =  position.coords.latitude;
     longitudInicial = position.coords.longitude;
@@ -157,7 +158,7 @@ function success(position) {
     error('Geo Location is not supported');
   }
   /////////////////   FIN CONFIGURACIÓN GOOGLE MAPS   ////////////////////////////////////////////////////////////
-
+});  
 
 ////////////////// VALIDAR FORMULARIO ////////////
 
@@ -212,91 +213,6 @@ $("form#data").submit(function(){
 });
 
 
-/*
-var reader = new FileReader();
-
- function autoload(event) {
-            var input = event.target;
-            reader.readAsBinaryString(input.files[0]);
-        };
-
-function validar()
-{
-    var erroresFormulario = "";
-    var nombreImagen = document.getElementById("fileUpload").value;
-    var rut = document.getElementById("rut").value;
-    var ani = document.getElementById("ani").value;
-    var coordenadas = document.getElementById("coordenadas").value;
-    var tipoAlerta = window.idAlerta;
-    var descripcion = document.getElementById("descripcion").value;
-    var nombre = document.getElementById("nombre").value;
-
-    if(!validarUpload(nombreImagen))
-    {
-      erroresFormulario = erroresFormulario + " El archivo a subir debe ser una imagen"; 
-    }
-    console.log("validarUpload: " + validarUpload(nombreImagen));
-
-    if(rut!="" && !validarut(rut))
-    {
-       erroresFormulario = erroresFormulario + " Rut es incorrecto";
-    }
-     console.log("validarut: " + validarut(rut));
-
-     if(descripcion!="")
-     {
-     	erroresFormulario = erroresFormulario + " Debe ingresar una descripción.";
-     }
-
-    if( ani != "" && (isNaN(parseFloat(ani)) && !isFinite( ani) ) )
-    {
-       erroresFormulario = erroresFormulario + "  Teléfono invalido";       
-    }
-
-    if( erroresFormulario == "")
-    {
-	 
-	 var url = 'http://sedam.gotdns.org:8082/SedamWS/SedamService.svc/Alert'
-
-      var formData = {
-            'sType'     : tipoAlerta,
-            'sANI'      : ani,
-            'sLoc'      : coordenadas.replace("(", "").replace(")", ""),
-            'sDesc'     : descripcion,
-            'sNID'      : rut,
-            'sName'     : nombre,
-            'sFile'     : reader.result,
-            'sExt'      : ""
-        };
-
-        $.ajax({
-            type        : 'POST', 
-            url         : 'http://sedam.gotdns.org:8082/SedamWS/SedamService.svc/Alert', 
-            data        : formData,
-            dataType    : 'json',
-            contentType : "application/json; charset=UTF-8", 
-            //encode      : true,
-           success: function (response) {
-              console.log(response);
-            },
-            error: function (xhrListaEvento, ajaxOptionsListaEvento, thrownErrorListaEvento) {          
-              console.log(xhrListaEvento.status + "Error Lista Eventos");
-              console.log(thrownError + "Error Lista Eventos");
-              console.log(xhrListaEvento.responseText  + "Error Lista Eventos");
-            }
-          })
-          .done(function(data){
-
-                  console.log(data); 
-                  
-          });
-    }
-    else
-    {
-      alert("Formulario FAIL!: " + erroresFormulario);
-    }
-
-}*/
 ////////////////// FIN VALIDAR FORMULARIO ////////////
 
     function validarut(rut)
