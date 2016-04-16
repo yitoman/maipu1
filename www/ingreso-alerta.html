@@ -72,7 +72,6 @@ var errorGeolocalizacion = "";
 var onSuccess = function(position) {
     latitudInicial =  position.coords.latitude;
     longitudInicial = position.coords.longitude;
-    success();
 };
 
 // onError Callback receives a PositionError object
@@ -82,17 +81,21 @@ function onError(error) {
     console.log(geolocalizacion);
 }
 
-document.addEventListener("deviceready", function(){
-  navigator.geolocation.getCurrentPosition(onSuccess, onError);
-}, false);
+navigator.geolocation.getCurrentPosition(onSuccess, onError);
 
-
-function success() {
+function success(position) {
 
   var coords;
-  if(errorGeolocalizacion != "")
+  if(errorGeolocalizacion == "")
   {
-    var options = {
+    coords = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+  }
+  else
+  {
+    coords = new google.maps.LatLng(latitudInicial, longitudInicial); 
+  }
+  
+  var options = {
     zoom: 15,
     center: coords,
     mapTypeControl: false,
@@ -100,18 +103,17 @@ function success() {
       style: google.maps.NavigationControlStyle.SMALL
     },
     mapTypeId: google.maps.MapTypeId.ROADMAP
-    };
-    map = new google.maps.Map(document.getElementById("map_canvas"), options);
+  };
+  map = new google.maps.Map(document.getElementById("map_canvas"), options);
 
-    var marker = new google.maps.Marker({
-        position: coords,
-        map: map  
-    });
-    markers.push(marker);
-    document.getElementById("sAlrtLocation").value = coords;
-    var coorString = document.getElementById("sAlrtLocation").value;
-    document.getElementById("sAlrtLocation").value = coorString.replace("(","").replace(")","");
-  }
+  var marker = new google.maps.Marker({
+      position: coords,
+      map: map  
+  });
+  markers.push(marker);
+  document.getElementById("sAlrtLocation").value = coords;
+  var coorString = document.getElementById("sAlrtLocation").value;
+  document.getElementById("sAlrtLocation").value = coorString.replace("(","").replace(")","");
   
 
     // This event listener will call addMarker() when the map is clicked.
@@ -210,91 +212,7 @@ $("form#data").submit(function(){
 });
 
 
-/*
-var reader = new FileReader();
 
- function autoload(event) {
-            var input = event.target;
-            reader.readAsBinaryString(input.files[0]);
-        };
-
-function validar()
-{
-    var erroresFormulario = "";
-    var nombreImagen = document.getElementById("fileUpload").value;
-    var rut = document.getElementById("rut").value;
-    var ani = document.getElementById("ani").value;
-    var coordenadas = document.getElementById("coordenadas").value;
-    var tipoAlerta = window.idAlerta;
-    var descripcion = document.getElementById("descripcion").value;
-    var nombre = document.getElementById("nombre").value;
-
-    if(!validarUpload(nombreImagen))
-    {
-      erroresFormulario = erroresFormulario + " El archivo a subir debe ser una imagen"; 
-    }
-    console.log("validarUpload: " + validarUpload(nombreImagen));
-
-    if(rut!="" && !validarut(rut))
-    {
-       erroresFormulario = erroresFormulario + " Rut es incorrecto";
-    }
-     console.log("validarut: " + validarut(rut));
-
-     if(descripcion!="")
-     {
-     	erroresFormulario = erroresFormulario + " Debe ingresar una descripción.";
-     }
-
-    if( ani != "" && (isNaN(parseFloat(ani)) && !isFinite( ani) ) )
-    {
-       erroresFormulario = erroresFormulario + "  Teléfono invalido";       
-    }
-
-    if( erroresFormulario == "")
-    {
-	 
-	 var url = 'http://sedam.gotdns.org:8082/SedamWS/SedamService.svc/Alert'
-
-      var formData = {
-            'sType'     : tipoAlerta,
-            'sANI'      : ani,
-            'sLoc'      : coordenadas.replace("(", "").replace(")", ""),
-            'sDesc'     : descripcion,
-            'sNID'      : rut,
-            'sName'     : nombre,
-            'sFile'     : reader.result,
-            'sExt'      : ""
-        };
-
-        $.ajax({
-            type        : 'POST', 
-            url         : 'http://sedam.gotdns.org:8082/SedamWS/SedamService.svc/Alert', 
-            data        : formData,
-            dataType    : 'json',
-            contentType : "application/json; charset=UTF-8", 
-            //encode      : true,
-           success: function (response) {
-              console.log(response);
-            },
-            error: function (xhrListaEvento, ajaxOptionsListaEvento, thrownErrorListaEvento) {          
-              console.log(xhrListaEvento.status + "Error Lista Eventos");
-              console.log(thrownError + "Error Lista Eventos");
-              console.log(xhrListaEvento.responseText  + "Error Lista Eventos");
-            }
-          })
-          .done(function(data){
-
-                  console.log(data); 
-                  
-          });
-    }
-    else
-    {
-      alert("Formulario FAIL!: " + erroresFormulario);
-    }
-
-}*/
 ////////////////// FIN VALIDAR FORMULARIO ////////////
 
     function validarut(rut)
@@ -358,3 +276,4 @@ function validar()
 
 
 <script type="text/javascript" src="js/functions.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&callback=success"></script>
