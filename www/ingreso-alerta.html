@@ -68,10 +68,18 @@ var longitudInicial;
 var errorGeolocalizacion = "";
 
 
+$(function(){
+  document.addEventListener("deviceready", onDeviceReady, false);
+})
+
+function onDeviceReady() {
+  navigator.geolocation.getCurrentPosition(onSuccess, onError);     
+}
 
 var onSuccess = function(position) {
     latitudInicial =  position.coords.latitude;
     longitudInicial = position.coords.longitude;
+    success();
 };
 
 // onError Callback receives a PositionError object
@@ -81,9 +89,9 @@ function onError(error) {
     console.log(geolocalizacion);
 }
 
-navigator.geolocation.getCurrentPosition(onSuccess, onError);
+//navigator.geolocation.getCurrentPosition(onSuccess, onError);
 
-function success(position) {
+function success() {
 
   var coords;
   if(errorGeolocalizacion == "")
