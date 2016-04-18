@@ -1,0 +1,146 @@
+<script type="text/javascript">
+$( document ).ready(function() {
+
+  var idCentro = window.idCentro;
+  var desOrganizacion = window.desOrganizacion;
+
+    var myurl = "http://sedam.gotdns.org:8082/SedamWS/SedamService.svc/EducationalReferences";
+        
+  jQuery.ajax({
+          type: "GET",
+          url: myurl,
+          dataType: "json",
+          contentType: 'application/json',
+          async: false,
+          success: function (response) {
+            console.log(response);
+            
+            if(typeof response =='object')
+            {
+                var data = response.Organizations;
+
+                $.each(data, function(i, field){
+
+                  if(field.OrgsId == idCentro){
+                  {
+                    var detalleCentro = '<div class="fixed-top">'+
+                      '<header class="col-xs-12 top-section">' +
+                        '<a href="#item2" class="back"> </a>' +
+                        '<span>'+
+                          '<i class="head-icon codeduc"></i>' +
+                          'CODEDUC'+
+                        '</span>' +
+                      '</header>' +
+                      '</div>'+
+                    '<div id="detail-colegio-' + field.OrgsId +'" class="content">'+
+                      '<div class="body-wrap">' +
+                        '<div class="col-xs-12 no-padding" id="detail-center">'+
+
+                          '<img src="http://sedam.gotdns.org:8082/SedamWS' + field.OrgsImage + '" class="img-responsive" /> '+
+                          '<div class="section-title upperCase">' + field.OrgsName + '</div>';
+
+                    //Obtener las coordenadas
+                    var coordenadasDetalle = $.grep(field.References, function (element, index) {
+                        return element.OrefName == "Coordenadas";
+                    });                      
+                    if(typeof coordenadasDetalle =='object' && coordenadasDetalle[0])
+                    { 
+                      var coor = coordenadasDetalle[0].OrefValue;                   
+                    }
+
+
+                    //Obtener la dirección y validar para incluirlo en la vista
+                    var direccionDetalle = $.grep(field.References, function (element, index) {
+                      return element.OrefName == "Dirección";
+                    });                    
+                    if(typeof direccionDetalle =='object' && direccionDetalle[0])
+                    {
+                      detalleCentro =  detalleCentro + '<div class="section-description">'+
+                      '<a href="http://maps.apple.com/maps?q=' + coor +'" class="location-link">' + direccionDetalle[0].OrefValue +'</a>'+
+                      '</div>';                      
+                    }
+
+
+                    //Obtener al director y validar para incluirlo en la vista
+                    var directorDetalle = $.grep(field.References, function (element, index) {
+                      return element.OrefName == "Director";
+                    });
+                    if(typeof directorDetalle  =='object' && directorDetalle[0])
+                    {
+                      detalleCentro =  detalleCentro + '<div class="section-description">' + directorDetalle[0].OrefValue +'</div>';
+                    }
+
+
+                    //Obtener el teléfono y validar para incluirlo en la vista
+                    var mesaCentralDetalle = $.grep(field.References, function (element, index) {
+                      return element.OrefName == "Mesa Central";
+                    });
+                    if(typeof mesaCentralDetalle =='object' && mesaCentralDetalle[0])
+                    {
+                      detalleCentro =  detalleCentro + '<div class="section-title">Teléfonos</div><div class="section-description">' + mesaCentralDetalle[0].OrefValue +'</div>';
+                    }
+
+
+                    //Obtener la descripción y validar para incluirlo en la vista
+                    if(field.OrgsDesc != null && field.OrgsDesc != "")
+                    {
+                       detalleCentro =  detalleCentro + '<div class="section-title">Servicios</div><div class="section-description">' + field.OrgsDesc +'</div>';
+                    }             
+
+                    detalleCentro =  detalleCentro + 
+                        '</div>' +
+                      '</div>' +
+                    '</div>';
+                    $(detalleCentro).appendTo("#item3");  
+
+                  }//Fin Valida que el centro tenga detalle
+                     
+              }  
+              });
+            } 
+            else
+            {
+
+            var errorFormatoData = '<div class="section-title">No es posible mostrar la información por el momento. Por favor intente nuevamente más adelante</div>';
+               $(errorFormatoData).appendTo("#servicios");  
+
+                var errorType = "Respuesta no es en el formato correcto";
+                //alert(errorType);
+                console.log(errorType);
+            }
+
+          }
+          ,
+          error: function (xhr, ajaxOptions, thrownError) {
+            //alert(xhr.status);
+            var errorNoHayServicio = '<div class="section-title">No es posible mostrar la información por el momento. Por favor intente nuevamente más adelante</div>';
+            $(errorNoHayServicio).appendTo("#servicios");  
+            console.log(xhr.status);
+            console.log(thrownError);
+            console.log(xhr.responseText );
+          }
+        });
+
+  $("#detail-colegio-" + idCentro).show();
+
+  $('.e-slide').on('click', function(){
+    $('#wrapper').scrollTo($(this).attr('href'), 500);
+    return false;
+  });
+
+  $('a.back').on('click', function () {
+    $('#wrapper').scrollTo($(this).attr('href'), 500);
+    
+    var delDuplicate = $(this).parent().parent().parent().parent().attr('id');
+    
+    if(delDuplicate === "item2"){
+      $("#item3, #item4").empty();
+    }
+
+    return false;
+  });
+
+});
+
+
+</script>

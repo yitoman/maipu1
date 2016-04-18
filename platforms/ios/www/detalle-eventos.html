@@ -1,0 +1,205 @@
+<script type="text/javascript">
+
+$( document ).ready(function() {
+
+	var idListaEventos = window.idListaEventos;
+	var nameListaEventos = window.nameListaEventos;
+
+        var myurlEvento = "http://sedam.gotdns.org:8082/SedamWS/SedamService.svc/Events/"+idListaEventos+"/";
+        //console.log(myurlEvento);
+
+         	jQuery.ajax({
+	          type: "GET",
+	          url: myurlEvento,
+	          dataType: "json",
+           	  contentType: 'application/json',
+	          async: false,
+	          timeout: 5000,
+	          complete: function (responseListaEvento) {
+		           
+					
+			var responseData = JSON.parse(responseListaEvento.responseText);
+			console.log(responseData);
+            if(typeof responseData =='object')
+            {		                    	
+
+            var listaEventos = '<div class="fixed-top">'+
+                '<header class="col-xs-12 top-section">' +
+                  '<a href="#item2" class="back"> </a>' +
+                  '<span>'+
+                    '<i class="head-icon eventos"></i>'+
+                     nameListaEventos +
+                  '</span>' +
+                  '<a class="pull-right" data-toggle="collapse" href="#search-box-2" aria-expanded="false">'+
+                    '<i class="search-icon search"></i>'+
+                  '</a>'+
+                '</header>' +
+                '</div>'+
+                '<div class="col-xs-12 collapse wrap-search-box" id="search-box-2">'+
+                  '<form action="" id="search-box">'+
+                    '<input type="text" placeholder="Buscar..." class="form-control filter" />'+
+                  '</form>'+
+                '</div>'+
+                '<div id="detail-evento-' + idListaEventos +'" class="content">'+
+                '<div class="body-wrap">' +
+                  	'<div class="col-xs-12 no-padding">'+
+                  	'<ul class="col-xs-12 list-arrow">';
+
+            var detalleEvento = '<div class="fixed-top">'+
+                '<header class="col-xs-12 top-section">' +
+                  '<a href="#item3" class="back"> </a>' +
+                  '<span>'+
+                    '<i class="head-icon eventos"></i>' + nameListaEventos +
+                  '</span>' +
+                '</header>' +
+                '</div>'+
+                '<div id="detail-uni-evento-' + idListaEventos +'" class="content">'+
+                '<div class="body-wrap">' +
+                  	'<div class="col-xs-12 no-padding relative">';
+
+            if (typeof responseData.Events =='object' && responseData.Events.length > 0) {
+                console.log(responseData.Events);
+
+         $.each(responseData.Events, function(j, dataListaEventos){
+
+            listaEventos =  listaEventos + 
+            '<li>'+
+              '<a href="#item4" data-show="detalle-uni-'+dataListaEventos.EvntId+'" class="e-slide">' +  dataListaEventos.EvntName + '</a>'+
+              '<div class="section-title min-description">' + 
+                '<a href="#item4" data-show="detalle-uni-'+dataListaEventos.EvntId+'" class="e-slide">' + dataListaEventos.EvntDesc + '</a>' +
+              '</div>';
+                        detalleEvento =  detalleEvento +
+                        '<div class="detail-individual" id="detalle-uni-'+dataListaEventos.EvntId+'">'+                     
+                    '<div class="col-xs-12 no-padding">';
+                      
+                      //Obtener el precio 
+                      var imagenDetalle = $.grep(dataListaEventos.References, function (element, index) {
+                                return element.RtypName == "Imagen";
+                                });
+                      if(typeof imagenDetalle =='object' && imagenDetalle[0])
+                      { 
+                        detalleEvento =  detalleEvento +
+                          '<img src="http://sedam.gotdns.org:8082/SedamWS/' + imagenDetalle[0].ErefValue + '" class="img-responsive" alt="Imagen evento">';                     
+                      }
+
+                      detalleEvento =  detalleEvento +
+                '</div>'+
+                            '<h2>' +  dataListaEventos.EvntName + '</h2>' +
+                            '<ul class="striped">'+
+                              '<li>' + dataListaEventos.EvntDesc + '</li>' +
+                              '<li>Horarios:</li>' +
+                              '<li>' + dataListaEventos.EvntIniDate + " - " + dataListaEventos.EvntEndDate + '</li>';
+
+                      //Obtener el precio 
+                      var precioDetalle = $.grep(dataListaEventos.References, function (element, index) {
+                                return element.ErefName == "Precio";
+                                });
+                      if(typeof precioDetalle =='object' && precioDetalle[0])
+                      { 
+                        detalleEvento =  detalleEvento +
+                          '<li>Valor:</li>'+
+                          '<li>' + precioDetalle[0].ErefValue + '</li>';                     
+                      }
+
+                      //Obtener la dirección 
+                      var direccionDetalle = $.grep(dataListaEventos.References, function (element, index) {
+                                return element.ErefName == "Dirección";
+                                });                      
+                      if(typeof direccionDetalle =='object' && direccionDetalle[0])
+                      { 
+                        detalleEvento =  detalleEvento +
+                          '<li>Dirección:</li>'+
+                          '<li>' + direccionDetalle[0].ErefValue +'</li>';                   
+                      }
+
+                      //Obtener coordenadas 
+                      var coordenadasDetalle = $.grep(dataListaEventos.References, function (element, index) {
+                                return element.ErefName == "Coordenadas";
+                                });                      
+                      if(typeof coordenadasDetalle =='object' && coordenadasDetalle[0])
+                      { 
+                        detalleEvento =  detalleEvento +
+                          '<li>¿Cómo llegar?</li>'+
+                          '<li><a href="http://maps.apple.com/maps?q=' + coordenadasDetalle[0].ErefValue +'" class="location-link">Pincha aquí</a></li>';
+                      }
+                     
+                      listaEventos =  listaEventos + '</li>';
+                      detalleEvento =  detalleEvento + '</ul></div>';
+
+              }); //Fin loop listado eventos 
+            }else{
+              listaEventos =  listaEventos + 
+              '<li class="text-center padding-tb-20">No hay eventos disponibles en esta categoría</li>';
+            }
+
+
+                      listaEventos =  listaEventos + 
+                      '</ul>'+
+                      '</div>' +
+                        '</div>'+
+                      '</div>';
+                      $("#item3").empty();
+                      $(listaEventos).appendTo("#item3");
+
+                      detalleEvento =  detalleEvento + 
+                      '</div>' +
+                        '</div>'+
+                      '</div>';
+                      $("#item4").empty();
+                      $(detalleEvento).appendTo("#item4");
+
+                	}//Fin Valida que el centro tenga detalle
+                	
+		        }
+		        ,
+		          error: function (xhrListaEvento, ajaxOptionsListaEvento, thrownErrorListaEvento) {
+		            //alert(xhr.status);
+		            var errorNoHayServicio = '<div class="section-title">No es posible mostrar la información por el momento. Por favor intente nuevamente más adelante</div>';
+		            $(errorNoHayServicio).appendTo("#servicios");  
+		            console.log(xhrListaEvento.status + "Error Lista Eventos");
+		            console.log(thrownError + "Error Lista Eventos");
+		            console.log(xhrListaEvento.responseText  + "Error Lista Eventos");
+		          }
+		        
+		});
+
+
+	$('.e-slide').on('click', function(){
+		$('#wrapper').scrollTo($(this).attr('href'), 500);		
+
+		if ($(this).attr('data-show') != ""){
+			var detalleShow = $(this).attr('data-show');
+			$("#" + detalleShow).show();
+
+		}
+		return false;
+	});
+
+	$('a.back').on('click', function () {
+		$('#wrapper').scrollTo($(this).attr('href'), 500);
+		$('#item4 .detail-individual').hide();
+		
+		var delDuplicate = $(this).parent().parent().parent().parent().attr('id');
+		if(delDuplicate === "item2" || delDuplicate === "item3"){
+			$("#item3").empty();
+		}
+		return false;
+	});
+
+  $(".filter").keyup(function(){
+
+      var filter = $(this).val(), count = 0;
+
+      $("ul li").each(function(){
+          if ($(this).text().search(new RegExp(filter, "i")) < 0) {
+              $(this).fadeOut();
+          } else {
+              $(this).show();
+              count++;
+          }
+      });
+  });
+
+});
+
+</script>

@@ -1,0 +1,109 @@
+<script type="text/javascript">
+
+$( document ).ready(function() {
+
+	var idFuncionario = window.idFuncionario;
+  var showFuncionario = window.showFuncionario;
+
+   var myUrlFuncionario = "http://sedam.gotdns.org:8082/sedamws/sedamservice.svc/authorities";
+    
+     	jQuery.ajax({
+        type: "GET",
+        url: myUrlFuncionario,
+        dataType: "json",
+       	  contentType: 'application/json',
+        async: false,
+        timeout: 5000,
+        complete: function (responseListaFuncionarios) {
+		           
+					
+			var responseData = JSON.parse(responseListaFuncionarios.responseText);
+			console.log(responseData);
+        if(typeof responseData =='object')
+          {		                    	
+
+        var listaFuncionarios = 
+          '<div class="fixed-top">'+
+            '<header class="col-xs-12 top-section">' +
+              '<a href="#item2" class="back"> </a>' +
+              '<span>'+
+                '<i class="head-icon alcalde"></i>' +
+                'ALCALDE Y CONSEJALES'+
+              '</span>' +
+            '</header>' +
+          '</div>'+
+          '<div id="' + idFuncionario +'" class="content">'+
+            '<div class="body-wrap">' +
+              '<div class="col-xs-12 no-padding">';
+
+         	 $.each(responseData.People, function(j, dataListaFun){
+
+						listaFuncionarios =  listaFuncionarios +
+              '<div class="detail-individual" id="detail-funcionario-'+dataListaFun.PpleId+'">'+
+                '<div class="col-xs-12 no-padding bg-white">'+
+                  '<div class="col-xs-7 text-center m-tb-15"><strong>'+ dataListaFun.PpleName + '<br/>(' + dataListaFun.RoleName + ')' +'</strong></div>'+
+                  '<div class="col-xs-5 no-padding">'+
+                    '<img src="http://sedam.gotdns.org:8082/SedamWS/images/'+ dataListaFun.PpleImage +'" class="img-responsive" alt="Imagen Funcionario">'+
+                  '</div>'+
+                '</div>'+
+                '<div class="border-tb-gris">'+
+                  '<div class="col-xs-12 no-padding padding-tb-10">'+
+                    '<ul class="striped">';
+                      $.each(dataListaFun.References, function(i, subfield){
+                        if(subfield.RgrpName != "Imagen Principal"){
+                        listaFuncionarios =  listaFuncionarios +
+                          '<li>'+ subfield.PrefName + ': </li>'+
+                          '<li>'+
+                            '<strong><a href="'+subfield.PrefValue+'">'+ subfield.PrefValue +'</a></strong>'+
+                          '</li>';
+                        }
+                      });
+                    listaFuncionarios =  listaFuncionarios +
+                    '</ul>'+
+                  '</div>'+
+                '</div>'+
+                '<div class="">'+
+                  '<div class="col-xs-12"><p class="text-justify">'+ dataListaFun.PpleDesc +'</p></div>'+
+                '</div>'+
+              '</div>';
+
+					}); //Fin loop listado eventos 
+
+          listaFuncionarios =  listaFuncionarios + 
+              '</div>'+
+            '</div>'+
+          '</div>';
+          $("#item3").empty();
+          $(listaFuncionarios).appendTo("#item3");
+
+       	}//Fin Valida que el centro tenga detalle
+                	
+        }
+        ,
+          error: function (xhrListaFuncionarios, ajaxOptionsListaFuncionarios, thrownErrorListaFuncionarios) {
+            //alert(xhr.status);
+            var errorNoHayServicio = '<div class="section-title">No es posible mostrar la información por el momento. Por favor intente nuevamente más adelante</div>';
+            $(errorNoHayServicio).appendTo("#servicios");  
+            console.log(xhrListaEvento.status + "Error Lista Funcionarios");
+            console.log(thrownError + "Error Lista Funcionarios");
+            console.log(xhrListaEvento.responseText  + "Error Lista Funcionarios");
+          }
+		        
+		});
+
+  $("#" + showFuncionario).show();
+
+	$('a.back').on('click', function () {
+		$('#wrapper').scrollTo($(this).attr('href'), 500);
+		$('#item3 .detail-individual').hide();
+		
+		var delDuplicate = $(this).parent().parent().parent().parent().attr('id');
+		if(delDuplicate === "item2" || delDuplicate === "item3"){
+			$("#item3").empty();
+		}
+		return false;
+	});
+
+});
+
+</script>

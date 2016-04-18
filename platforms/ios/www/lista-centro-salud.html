@@ -1,0 +1,138 @@
+<div class="fixed-top">
+  <header id="header" class="col-xs-12 top-section">
+      <a href="#item1" class="back"> </a>
+      <span>
+        <i class="head-icon centros"></i>
+        CENTROS DE SALUD
+      </span>
+      <a id="btn-search" class="pull-right" data-toggle="collapse" href="#search-box" aria-expanded="false">
+        <i class="search-icon search"></i>
+      </a>
+  </header>
+  <div class="col-xs-12 collapse wrap-search-box" id="search-box">
+    <form action="" id="search-boxes">
+      <input type="text" placeholder="Buscar..." class="form-control filter" />
+    </form>
+  </div>
+</div>
+<div class="content">
+    <div id="lista-centro-salud" class="">
+       <div class="body-wrap">
+        <ul class="col-xs-12 collapse-list" id="servicios"> </ul>        
+       </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+$( document ).ready(function() {
+
+    var myurl = "http://sedam.gotdns.org:8082/SedamWS/SedamService.svc/HealthcareReferences";
+        
+    jQuery.ajax({
+          type: "GET",
+          url: myurl,
+          dataType: "json",
+          contentType: 'application/json',
+          async: false,
+          success: function (response) {
+            console.log(response);
+            
+            if(typeof response =='object')
+            {
+                var data = response.Organizations;
+                $("#servicios").empty();
+                var organizaciones = new Array();
+                var nombreOrganizacion = "";
+
+                $.each(data, function(i, field){
+                    var nombreOrganizacion = field.OgrpName;
+                   
+                   	//If agrupar centros
+                    if(jQuery.inArray( nombreOrganizacion, organizaciones ) == -1)
+                    {
+                      organizaciones.push(nombreOrganizacion);
+
+                      var listaOrganizaciones = '<li>'+
+                      '<div class="slide-title" data-toggle="collapse" data-target="#slide'+  field.OrgsId  +'">'+
+                          '<span>' + nombreOrganizacion + '</span>'+                      
+                      '</div>'+
+                    '<ul id="slide' + field.OrgsId + '" class="collapse in" ></ul>'+
+                    '</li>';
+                     $(listaOrganizaciones).appendTo("#servicios");                                       
+
+	                	//Loop Busca centros de la organización agrupada
+	                	$.each(data, function(i, subfield){
+	                  	 //Valida que el centro sea de la organización agrupada
+		                 if(subfield.OgrpName == nombreOrganizacion)
+		                 {   
+                    	  var desOrganizacion = field.OrgsDesc;
+	                      var listaCentros = 
+	                      '<li>'+
+	                          '<a href="#item3" id="'+ subfield.OrgsId +'" data-show="detail-salud-'+ subfield.OrgsId +'" data-descripcion="'+ desOrganizacion +'" class="show-detail e-slide">'+
+	                              '<span>' + subfield.OrgsName + '</span>'+
+	                              '<img src="img/icons/centros-salud.png" alt="" class="pull-right">' +
+	                          '</a>'+
+	                      '</li>';
+
+	                      $(listaCentros).appendTo("#slide" + field.OrgsId);
+	                    
+
+		                  }//Fin Valida que el centro sea de la organización agrupada
+		                    
+		                }); //Fin Loop Busca centros de la organización agrupada
+
+					}//Fin If agrupar centros
+
+            	});  
+            } 
+            else
+            {
+
+            var errorFormatoData = '<div class="section-title">No es posible mostrar la información por el momento. Por favor intente nuevamente más adelante</div>';
+               $(errorFormatoData).appendTo("#servicios");  
+
+                var errorType = "Respuesta no es en el formato correcto";
+                //alert(errorType);
+                console.log(errorType);
+            }
+
+          }
+          ,
+          error: function (xhr, ajaxOptions, thrownError) {
+            //alert(xhr.status);
+            var errorNoHayServicio = '<div class="section-title">No es posible mostrar la información por el momento. Por favor intente nuevamente más adelante</div>';
+            $(errorNoHayServicio).appendTo("#servicios");  
+            console.log(xhr.status);
+            console.log(thrownError);
+            console.log(xhr.responseText );
+          }
+        });
+
+
+	$('.e-slide').on('click', function(){
+		$('#wrapper').scrollTo($(this).attr('href'), 500);		
+		return false;
+	});
+
+	$('a.back').on('click', function () {
+		$('#wrapper').scrollTo($(this).attr('href'), 500);
+		
+		var delDuplicate = $(this).parent().parent().parent().parent().attr('id');
+		console.log("Parent: " + delDuplicate);
+		if(delDuplicate === "item2"){
+			$("#item3, #item4").empty();
+		}
+
+		return false;
+	});
+	
+	$(".show-detail").on('click', function(){
+		window.idCentro = $(this).attr('id');
+		window.desOrganizacion = $(this).attr('data-descripcion');
+    $("#item3").load('detalle-centro-salud.html');
+  });
+
+});
+
+</script>

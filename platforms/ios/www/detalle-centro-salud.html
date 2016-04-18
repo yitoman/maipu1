@@ -1,0 +1,154 @@
+<script type="text/javascript">
+
+$( document ).ready(function() {
+
+    var idCentro = window.idCentro;
+    var desOrganizacion = window.desOrganizacion;
+
+    window.header = true;
+    window.headerIcon = 'centros';
+    window.headerSearch = false;
+    window.headerBack = 'item2';
+    window.headerName = 'CENTROS DE SALUD';
+
+    console.log(header + " - " + headerBack);
+
+        var myurlEvento = "http://sedam.gotdns.org:8082/SedamWS/SedamService.svc/HealthcareReferences";
+        console.log(myurlEvento);
+
+            jQuery.ajax({
+              type: "GET",
+              url: myurlEvento,
+              dataType: "json",
+              contentType: 'application/json',
+              async: false,
+              timeout: 5000,
+              complete: function (responseListaEvento) {
+                   
+                    
+            var responseData = JSON.parse(responseListaEvento.responseText);
+            console.log(responseData);
+
+            var coordenadas = "";
+
+            $.each(responseData.Organizations, function(i, subfield){
+                if(subfield.OrgsId == idCentro){
+
+                  var detalleCentro = '<div id="detail-salud-' + idCentro +'" class="item-detalle">'+
+                  '<div class="fixed-top">'+
+                    '<header id="header" class="col-xs-12 top-section">'+
+                        '<a href="#item2" class="back"> </a>'+
+                        '<span>'+
+                          '<i class="head-icon centros"></i>'+
+                          'CENTROS DE SALUD'+
+                        '</span>'+
+                    '</header>'+                    
+                  '</div>'+
+                  '<div class="content">'+
+                  '<div id="detalle-centro-salud" class="">' +                    
+                    '<div class="body-wrap">' +
+                      '<div class="col-xs-12 no-padding" id="detail-center">'+
+                    '<img src="http://sedam.gotdns.org:8082/SedamWS/images/'+ subfield.OrgsImage +'" class="img-responsive" alt="" />'+
+                    '<div class="section-title">' + subfield.OrgsName + '</div>';
+
+                  //Obtener las coordenadas
+                  var coordenadasDetalle = $.grep(subfield.References, function (element, index) {
+                        return element.OrefName == "Coordenadas";
+                    });                      
+                  if(typeof coordenadasDetalle =='object' && coordenadasDetalle[0]) { 
+                    coordenadas = coordenadasDetalle[0].OrefValue;                 
+                  }
+
+
+                  //Obtener la dirección y validar para incluirlo en la vista
+                  var direccionDetalle = $.grep(subfield.References, function (element, index) {
+                      return element.OrefName == "Dirección";
+                  });                    
+                  if(typeof direccionDetalle =='object' && direccionDetalle[0])
+                  {
+                    detalleCentro =  detalleCentro +
+                     '<div class="section-description">'+
+                        '<a href="http://maps.apple.com/maps?q=' + coordenadas +'" class="location-link">' + direccionDetalle[0].OrefValue +'</a>'+
+                      '</div>';                      
+                  }
+
+
+                  //Obtener al director y validar para incluirlo en la vista
+                  var directorDetalle = $.grep(subfield.References, function (element, index) {
+                                              return element.OrefName == "Director";
+                                          });
+                  if(typeof directorDetalle  =='object' && directorDetalle[0])
+                  {
+                    detalleCentro =  detalleCentro + '<div class="section-description">' + directorDetalle[0].OrefValue +'</div>';
+                  }
+
+
+                  //Obtener el teléfono y validar para incluirlo en la vista
+                  var mesaCentralDetalle = $.grep(subfield.References, function (element, index) {
+                                              return element.OrefName == "Mesa Central";
+                                          });
+                  if(typeof mesaCentralDetalle =='object' && mesaCentralDetalle[0])
+                  {
+                    detalleCentro =  detalleCentro +
+                     '<div class="section-title">Teléfonos</div>'+
+                     '<div class="section-description">'+
+                        '<a href="tel:'+ mesaCentralDetalle[0].OrefValue +'" class="call-it">'+ mesaCentralDetalle[0].OrefValue +'</a>'+
+                     '</div>';
+                  }
+
+                      detalleCentro =  detalleCentro + '<div class="section-title">Servicios</div><div class="section-description"><pre>' + desOrganizacion +'</pre></div>';
+
+                  detalleCentro =  detalleCentro + 
+                      '</div>' +
+                    '</div>' +
+                  '</div>' +
+                    '</div>'+
+                  '</div>';
+                  $(detalleCentro).appendTo("#item3");  
+
+                }//Fin Valida que el centro tenga detalle
+
+    });//Fin Valida que el centro tenga detalle
+                    
+}
+,
+  error: function (xhrListaEvento, ajaxOptionsListaEvento, thrownErrorListaEvento) {
+    //alert(xhr.status);
+    var errorNoHayServicio = '<div class="section-title">No es posible mostrar la información por el momento. Por favor intente nuevamente más adelante</div>';
+    $(errorNoHayServicio).appendTo("#servicios");  
+    console.log(xhrListaEvento.status + "Error Lista Eventos");
+    console.log(thrownError + "Error Lista Eventos");
+    console.log(xhrListaEvento.responseText  + "Error Lista Eventos");
+  }
+                
+});
+
+    $("#detail-salud-"+idCentro).show();
+
+    $('.e-slide').on('click', function(){
+        $('#wrapper').scrollTo($(this).attr('href'), 500);      
+
+        if ($(this).attr('data-show') != ""){
+            var detalleShow = $(this).attr('data-show');
+            $("#" + detalleShow).show();
+
+        }
+        return false;
+    });
+
+    $('a.back').on('click', function () {
+        $('#wrapper').scrollTo($(this).attr('href'), 500);
+        $('#item4 .detail-individual').hide();
+        
+        var delDuplicate = $(this).parent().parent().parent().parent().attr('id');
+        if(delDuplicate === "item2" || delDuplicate === "item3"){
+            $("#item3").empty();
+        }
+        return false;
+    });
+
+
+});
+</script>
+
+<script type="text/javascript" src="js/functions.js"></script>
