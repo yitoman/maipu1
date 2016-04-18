@@ -7,9 +7,6 @@
         "files": {}
     },
     "installed_plugins": {
-        "com.alexwasner.plugins.orientationlock": {
-            "PACKAGE_NAME": "com.phonegap.helloworld"
-        },
         "cordova-plugin-geolocation": {
             "PACKAGE_NAME": "com.phonegap.helloworld"
         },

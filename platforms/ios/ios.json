@@ -9,10 +9,6 @@
                 "parents": {
                     "/*": [
                         {
-                            "xml": "<feature name=\"OrientationLock\"><param name=\"ios-package\" value=\"OrientationLock\" /></feature>",
-                            "count": 1
-                        },
-                        {
                             "xml": "<feature name=\"Geolocation\"><param name=\"ios-package\" value=\"CDVLocation\" /></feature>",
                             "count": 1
                         },
@@ -36,9 +32,6 @@
         }
     },
     "installed_plugins": {
-        "com.alexwasner.plugins.orientationlock": {
-            "PACKAGE_NAME": "com.phonegap.helloworld"
-        },
         "cordova-plugin-geolocation": {
             "PACKAGE_NAME": "com.phonegap.helloworld"
         },
@@ -51,14 +44,6 @@
     },
     "dependent_plugins": {},
     "modules": [
-        {
-            "file": "plugins/com.alexwasner.plugins.orientationlock/www/OrientationLock.js",
-            "id": "com.alexwasner.plugins.orientationlock.OrientationLock",
-            "pluginId": "com.alexwasner.plugins.orientationlock",
-            "clobbers": [
-                "OrientationLock"
-            ]
-        },
         {
             "file": "plugins/cordova-plugin-geolocation/www/Coordinates.js",
             "id": "cordova-plugin-geolocation.Coordinates",
@@ -101,7 +86,6 @@
         }
     ],
     "plugin_metadata": {
-        "com.alexwasner.plugins.orientationlock": "0.0.1",
         "cordova-plugin-geolocation": "2.1.0",
         "cordova-plugin-splashscreen": "3.2.1",
         "cordova-plugin-whitelist": "1.2.0"
