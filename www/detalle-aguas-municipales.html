@@ -32,7 +32,7 @@ $( document ).ready(function() {
               //Valida que el tramite tenga detalle
               if(typeof subfield.References =='object' && subfield.SvcsId == detailId)
               {
-                  var detalleTramite = '<div id="detail-tramite-' + subfield.SvcsId +'" class="content item-detalle">'+
+                  var detalleTramite = '<div class="fixed-top">'+
                   '<div class="contain">'+
                   '<div id="detalle-tramite" class="">' +
                     '<header class="col-xs-12 top-section">' +
@@ -42,6 +42,8 @@ $( document ).ready(function() {
                         'AGUAS MUNICIPALES'+
                       '</span>' +
                     '</header>' +
+                    '</div>'+
+                  '<div id="detail-tramite-' + subfield.SvcsId +'" class="content item-detalle">'+
                     '<div class="body-wrap">' +
                       '<div class="col-xs-12 no-padding relative" id="detail-tramite">'+
                         '<h2>' + subfield.SvcsName + '</h2>'+

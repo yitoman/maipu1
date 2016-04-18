@@ -23,7 +23,7 @@ $( document ).ready(function() {
             if(typeof responseData =='object')
             {		                    	
 
-            var listaEventos = '<div id="detail-evento-' + idListaEventos +'" class="content">'+
+            var listaEventos = '<div class="fixed-top">'+
                 '<header class="col-xs-12 top-section">' +
                   '<a href="#item2" class="back"> </a>' +
                   '<span>'+
@@ -34,22 +34,26 @@ $( document ).ready(function() {
                     '<i class="search-icon search"></i>'+
                   '</a>'+
                 '</header>' +
+                '</div>'+
                 '<div class="col-xs-12 collapse wrap-search-box" id="search-box-2">'+
                   '<form action="" id="search-box">'+
                     '<input type="text" placeholder="Buscar..." class="form-control filter" />'+
                   '</form>'+
                 '</div>'+
+                '<div id="detail-evento-' + idListaEventos +'" class="content">'+
                 '<div class="body-wrap">' +
                   	'<div class="col-xs-12 no-padding">'+
                   	'<ul class="col-xs-12 list-arrow">';
 
-            var detalleEvento = '<div id="detail-uni-evento-' + idListaEventos +'" class="content">'+
+            var detalleEvento = '<div class="fixed-top">'+
                 '<header class="col-xs-12 top-section">' +
                   '<a href="#item3" class="back"> </a>' +
                   '<span>'+
                     '<i class="head-icon eventos"></i>' + nameListaEventos +
                   '</span>' +
                 '</header>' +
+                '</div>'+
+                '<div id="detail-uni-evento-' + idListaEventos +'" class="content">'+
                 '<div class="body-wrap">' +
                   	'<div class="col-xs-12 no-padding relative">';
 
@@ -66,7 +70,7 @@ $( document ).ready(function() {
               '</div>';
                         detalleEvento =  detalleEvento +
                         '<div class="detail-individual" id="detalle-uni-'+dataListaEventos.EvntId+'">'+                     
-                    '<div class="col-xs-12">';
+                    '<div class="col-xs-12 no-padding">';
                       
                       //Obtener el precio 
                       var imagenDetalle = $.grep(dataListaEventos.References, function (element, index) {

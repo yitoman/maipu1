@@ -45,11 +45,15 @@ body
 				color #6E6E6E
 .content
 	width 100%
-	height calc(100% - 9.5%)
-	top 0
+	height calc(100% - 9.5% - 60px)
+	top 0px
 	margin 0 auto
 	position relative
-	overflow scroll
+	overflow-y scroll
+	overflow-x hidden
+.content-fix
+	height calc(100% - 9.5%)
+	top 0
 .contain
 	height 100%
 	width 100%
@@ -272,6 +276,7 @@ h2
 	background #ECECEB
 	border-bottom #C4C4C4 5px solid
 	color #868585
+	display block
 	padding 10px 20px
 	text-align center
 	strong
@@ -387,8 +392,17 @@ h2
 	max-height 25px!important
 	margin 1.5% 0
 .wrap-search-box
+	background $bgColor
+	box-shadow 0px 8px 20px rgba(0,0,0,.5)
 	padding 15px 20px
+	z-index 99
 .bg-white
 	font-size 4.5vw
 	@media screen and (min-width: 640px)
 		font-size 3.5vw
+.fixed-top
+	//position fixed
+	//left 0
+	//top 0
+	//width 100%
+	//z-index 99

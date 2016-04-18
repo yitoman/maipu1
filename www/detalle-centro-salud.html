@@ -5,6 +5,14 @@ $( document ).ready(function() {
     var idCentro = window.idCentro;
     var desOrganizacion = window.desOrganizacion;
 
+    window.header = true;
+    window.headerIcon = 'centros';
+    window.headerSearch = false;
+    window.headerBack = 'item2';
+    window.headerName = 'CENTROS DE SALUD';
+
+    console.log(header + " - " + headerBack);
+
         var myurlEvento = "http://sedam.gotdns.org:8082/SedamWS/SedamService.svc/HealthcareReferences";
         console.log(myurlEvento);
 
@@ -27,15 +35,17 @@ $( document ).ready(function() {
                 if(subfield.OrgsId == idCentro){
 
                   var detalleCentro = '<div id="detail-salud-' + idCentro +'" class="item-detalle">'+
+                  '<div class="fixed-top">'+
+                    '<header id="header" class="col-xs-12 top-section">'+
+                        '<a href="#item2" class="back"> </a>'+
+                        '<span>'+
+                          '<i class="head-icon centros"></i>'+
+                          'CENTROS DE SALUD'+
+                        '</span>'+
+                    '</header>'+                    
+                  '</div>'+
                   '<div class="content">'+
-                  '<div id="detalle-centro-salud" class="">' +
-                    '<header class="col-xs-12 top-section">' +
-                      '<a href="#item2" class="back"> </a>' +
-                      '<span>'+
-                        '<i class="head-icon centros"></i>' +
-                        'CENTROS DE SALUD'+
-                      '</span>' +
-                    '</header>' +
+                  '<div id="detalle-centro-salud" class="">' +                    
                     '<div class="body-wrap">' +
                       '<div class="col-xs-12 no-padding" id="detail-center">'+
                     '<img src="http://sedam.gotdns.org:8082/SedamWS/images/'+ subfield.OrgsImage +'" class="img-responsive" alt="" />'+
@@ -137,6 +147,8 @@ $( document ).ready(function() {
         return false;
     });
 
-});
 
+});
 </script>
+
+<script type="text/javascript" src="js/functions.js"></script>

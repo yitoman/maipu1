@@ -32,9 +32,7 @@ $( document ).ready(function() {
               //Valida que el tramite tenga detalle
               if(typeof subfield.References =='object' && subfield.SvcsId == detailId)
               {
-                  var detalleTramite = '<div id="detail-tramite-' + subfield.SvcsId +'" class="content item-detalle">'+
-                  '<div class="contain">'+
-                  '<div id="detalle-tramite" class="">' +
+                  var detalleTramite = '<div class="fixed-top">'+
                     '<header class="col-xs-12 top-section">' +
                       '<a href="#item3" class="back"> </a>' +
                       '<span>'+
@@ -42,6 +40,10 @@ $( document ).ready(function() {
                         'TRÁMITES Y SERVICIOS'+
                       '</span>' +
                     '</header>' +
+                  '</div>'+
+                  '<div id="detail-tramite-' + subfield.SvcsId +'" class="content item-detalle">'+
+                  '<div class="contain">'+
+                  '<div id="detalle-tramite" class="">' +
                     '<div class="body-wrap">' +
                       '<div class="col-xs-12 no-padding relative" id="detail-tramite">'+
                         '<h2>' + subfield.SvcsName + '</h2>'+

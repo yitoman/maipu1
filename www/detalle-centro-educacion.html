@@ -23,7 +23,7 @@ $( document ).ready(function() {
 
                   if(field.OrgsId == idCentro){
                   {
-                    var detalleCentro = '<div id="detail-colegio-' + field.OrgsId +'" class="content">'+
+                    var detalleCentro = '<div class="fixed-top">'+
                       '<header class="col-xs-12 top-section">' +
                         '<a href="#item2" class="back"> </a>' +
                         '<span>'+
@@ -31,6 +31,8 @@ $( document ).ready(function() {
                           'CODEDUC'+
                         '</span>' +
                       '</header>' +
+                      '</div>'+
+                    '<div id="detail-colegio-' + field.OrgsId +'" class="content">'+
                       '<div class="body-wrap">' +
                         '<div class="col-xs-12 no-padding" id="detail-center">'+
 
