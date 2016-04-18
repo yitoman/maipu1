@@ -73,18 +73,26 @@ $( document ).ready(function() {
 
                     //Obtener el teléfono y validar para incluirlo en la vista
                     var mesaCentralDetalle = $.grep(field.References, function (element, index) {
-                      return element.OrefName == "Mesa Central";
+                      return element.OrefName == "Teléfono Principal";
                     });
                     if(typeof mesaCentralDetalle =='object' && mesaCentralDetalle[0])
                     {
-                      detalleCentro =  detalleCentro + '<div class="section-title">Teléfonos</div><div class="section-description">' + mesaCentralDetalle[0].OrefValue +'</div>';
+                      detalleCentro =  detalleCentro + '<div class="section-title">Teléfono Principal</div><div class="section-description"><a href="tel:' + mesaCentralDetalle[0].OrefValue +'class="text-right call-it mini">' + mesaCentralDetalle[0].OrefValue +'</a></div>';
                     }
 
+                    //Obtener URL
+                    var sitioWeb = $.grep(field.References, function (element, index) {
+                      return element.OrefName == "URL";
+                    });
+                    if(typeof sitioWeb =='object' && sitioWeb[0])
+                    {
+                      detalleCentro =  detalleCentro + '<div class="section-title">Sitio Web</div><div class="section-description"><a href="' + sitioWeb[0].OrefValue +'" target="_blank">' + sitioWeb[0].OrefValue +'</a></div>';
+                    }
 
                     //Obtener la descripción y validar para incluirlo en la vista
                     if(field.OrgsDesc != null && field.OrgsDesc != "")
                     {
-                       detalleCentro =  detalleCentro + '<div class="section-title">Servicios</div><div class="section-description">' + field.OrgsDesc +'</div>';
+                       detalleCentro =  detalleCentro + '<div class="section-title">Descripción</div><div class="section-description">' + field.OrgsDesc +'</div>';
                     }             
 
                     detalleCentro =  detalleCentro + 
