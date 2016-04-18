@@ -61,12 +61,20 @@ $( document ).ready(function() {
                 console.log(responseData.Events);
 
          $.each(responseData.Events, function(j, dataListaEventos){
+            var fechaInicio = dataListaEventos.EvntIniDate;
+            var fechaInicio = $.trim(fechaInicio).substring(0, 10);
+            var fechaTermino = dataListaEventos.EvntEndDate;
+            var fechaTermino = $.trim(fechaTermino).substring(0, 10);
+
 
             listaEventos =  listaEventos + 
             '<li>'+
               '<a href="#item4" data-show="detalle-uni-'+dataListaEventos.EvntId+'" class="e-slide">' +  dataListaEventos.EvntName + '</a>'+
               '<div class="section-title min-description">' + 
-                '<a href="#item4" data-show="detalle-uni-'+dataListaEventos.EvntId+'" class="e-slide">' + dataListaEventos.EvntDesc + '</a>' +
+                '<a href="#item4" data-show="detalle-uni-'+dataListaEventos.EvntId+'" class="e-slide"><small>'+
+                  '<i>Fecha de inicio: ' + fechaInicio + '<br />' +
+                  'Fecha de término: ' + fechaTermino + '</i>' +
+                '</small></a>'+
               '</div>';
                         detalleEvento =  detalleEvento +
                         '<div class="detail-individual" id="detalle-uni-'+dataListaEventos.EvntId+'">'+                     

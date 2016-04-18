@@ -37,8 +37,7 @@ $( document ).ready(function() {
               '<div class="col-xs-12 no-padding">';
 
          	 $.each(responseData.People, function(j, dataListaFun){
-
-						listaFuncionarios =  listaFuncionarios +
+            listaFuncionarios =  listaFuncionarios +
               '<div class="detail-individual" id="detail-funcionario-'+dataListaFun.PpleId+'">'+
                 '<div class="col-xs-12 no-padding bg-white">'+
                   '<div class="col-xs-7 text-center m-tb-15"><strong>'+ dataListaFun.PpleName + '<br/>(' + dataListaFun.RoleName + ')' +'</strong></div>'+
@@ -47,23 +46,24 @@ $( document ).ready(function() {
                   '</div>'+
                 '</div>'+
                 '<div class="border-tb-gris">'+
+                '<div class="">'+
+                  '<div class="col-xs-12"><p class="text-justify">'+ dataListaFun.PpleDesc +'</p></div>'+
+                '</div>'+
                   '<div class="col-xs-12 no-padding padding-tb-10">'+
                     '<ul class="striped">';
                       $.each(dataListaFun.References, function(i, subfield){
+                        var valor = subfield.PrefValue;
+                        var valor = $.trim(valor).substring(0, 30);
                         if(subfield.RgrpName != "Imagen Principal"){
                         listaFuncionarios =  listaFuncionarios +
-                          '<li>'+ subfield.PrefName + ': </li>'+
-                          '<li>'+
-                            '<strong><a href="'+subfield.PrefValue+'">'+ subfield.PrefValue +'</a></strong>'+
+                          '<li><i class="fa fa-'+ subfield.PrefName +' fa-lg"></i>:' +
+                            '<strong><a href="'+subfield.PrefValue+'">'+ valor +'</a></strong>'+
                           '</li>';
                         }
                       });
                     listaFuncionarios =  listaFuncionarios +
                     '</ul>'+
                   '</div>'+
-                '</div>'+
-                '<div class="">'+
-                  '<div class="col-xs-12"><p class="text-justify">'+ dataListaFun.PpleDesc +'</p></div>'+
                 '</div>'+
               '</div>';
 
