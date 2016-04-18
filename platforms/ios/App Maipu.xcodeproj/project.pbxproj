@@ -39,12 +39,12 @@
 		7E7966E61810823500FA85AD /* icon-small.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E7966DC1810823500FA85AD /* icon-small.png */; };
 		7E7966E71810823500FA85AD /* icon-small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E7966DD1810823500FA85AD /* icon-small@2x.png */; };
 		D4A0D8761607E02300AEF8BB /* Default-568h@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = D4A0D8751607E02300AEF8BB /* Default-568h@2x~iphone.png */; };
-		AE9FCFCDDE564B2C8976C1E2 /* OrientationLock.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F74E1F2B4C742F2B47B75A3 /* OrientationLock.m */; };
-		649FACE2B16F410291F36798 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB07ACC814844A3E8ADA3E7C /* Foundation.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		CFE531CF9D1C4C41A2E1A970 /* CDVLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AFCF9D6275E43B29B510C7E /* CDVLocation.m */; };
-		D743CB8C8CF042C495F1D283 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7357A94453644216BDDAB869 /* CoreLocation.framework */; };
-		0997DB58B9D44D0EB7D63467 /* CDVSplashScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 948EAF86CF874C01A048F27B /* CDVSplashScreen.m */; };
-		EDAA6C06F4AA4DB38BD2908F /* CDVViewController+SplashScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = B8D1E37EA7CE4D3DB38FD4FB /* CDVViewController+SplashScreen.m */; };
+		8AC5BD01BF974072BC4C20C8 /* OrientationLock.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DD69C250BD544B5A61AF78D /* OrientationLock.m */; };
+		992897DF535B46EE82BFC36B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C72F222364C4E669441F39D /* Foundation.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		5BF22EA659EB4F6EA3A9652A /* CDVLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = F19C6B628048401C99D6A84C /* CDVLocation.m */; };
+		8A04944B5A97420C906983AE /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39CD0E12B4A644E1B5A56C05 /* CoreLocation.framework */; };
+		0767C1C601B048658837414E /* CDVSplashScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = A3B032A8A607450B81345DA1 /* CDVSplashScreen.m */; };
+		114DF6A3BC2046B081F09539 /* CDVViewController+SplashScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 77B8F3201E98435A96A0256B /* CDVViewController+SplashScreen.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -110,16 +110,16 @@
 		EB87FDF31871DA8E0020F90C /* www */ = {isa = PBXFileReference; lastKnownFileType = folder; name = www; path = ../../www; sourceTree = "<group>"; };
 		EB87FDF41871DAF40020F90C /* config.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = config.xml; path = ../../config.xml; sourceTree = "<group>"; };
 		F840E1F0165FE0F500CFE078 /* config.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = config.xml; path = "App Maipu/config.xml"; sourceTree = "<group>"; };
-		6F74E1F2B4C742F2B47B75A3 /* OrientationLock.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "OrientationLock.m"; path = "com.alexwasner.plugins.orientationlock/OrientationLock.m"; sourceTree = "<group>"; fileEncoding = 4; };
-		179E3F2124204DF7B070183B /* OrientationLock.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "OrientationLock.h"; path = "com.alexwasner.plugins.orientationlock/OrientationLock.h"; sourceTree = "<group>"; fileEncoding = 4; };
-		DB07ACC814844A3E8ADA3E7C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "Foundation.framework"; path = "System/Library/Frameworks/Foundation.framework"; sourceTree = SDKROOT; fileEncoding = 4; };
-		7AFCF9D6275E43B29B510C7E /* CDVLocation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "CDVLocation.m"; path = "cordova-plugin-geolocation/CDVLocation.m"; sourceTree = "<group>"; fileEncoding = 4; };
-		6122AC1A5C5E494CA7E06F83 /* CDVLocation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "CDVLocation.h"; path = "cordova-plugin-geolocation/CDVLocation.h"; sourceTree = "<group>"; fileEncoding = 4; };
-		7357A94453644216BDDAB869 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "CoreLocation.framework"; path = "System/Library/Frameworks/CoreLocation.framework"; sourceTree = SDKROOT; fileEncoding = 4; };
-		948EAF86CF874C01A048F27B /* CDVSplashScreen.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "CDVSplashScreen.m"; path = "cordova-plugin-splashscreen/CDVSplashScreen.m"; sourceTree = "<group>"; fileEncoding = 4; };
-		B8D1E37EA7CE4D3DB38FD4FB /* CDVViewController+SplashScreen.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "CDVViewController+SplashScreen.m"; path = "cordova-plugin-splashscreen/CDVViewController+SplashScreen.m"; sourceTree = "<group>"; fileEncoding = 4; };
-		EAF83CB4F4174967B18CC378 /* CDVSplashScreen.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "CDVSplashScreen.h"; path = "cordova-plugin-splashscreen/CDVSplashScreen.h"; sourceTree = "<group>"; fileEncoding = 4; };
-		389A151D8E3749F29A28C50C /* CDVViewController+SplashScreen.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "CDVViewController+SplashScreen.h"; path = "cordova-plugin-splashscreen/CDVViewController+SplashScreen.h"; sourceTree = "<group>"; fileEncoding = 4; };
+		5DD69C250BD544B5A61AF78D /* OrientationLock.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "OrientationLock.m"; path = "com.alexwasner.plugins.orientationlock/OrientationLock.m"; sourceTree = "<group>"; fileEncoding = 4; };
+		2E4B3EAD149444288BD6CA1D /* OrientationLock.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "OrientationLock.h"; path = "com.alexwasner.plugins.orientationlock/OrientationLock.h"; sourceTree = "<group>"; fileEncoding = 4; };
+		1C72F222364C4E669441F39D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "Foundation.framework"; path = "System/Library/Frameworks/Foundation.framework"; sourceTree = SDKROOT; fileEncoding = 4; };
+		F19C6B628048401C99D6A84C /* CDVLocation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "CDVLocation.m"; path = "cordova-plugin-geolocation/CDVLocation.m"; sourceTree = "<group>"; fileEncoding = 4; };
+		418434936D2949ED93A14FDC /* CDVLocation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "CDVLocation.h"; path = "cordova-plugin-geolocation/CDVLocation.h"; sourceTree = "<group>"; fileEncoding = 4; };
+		39CD0E12B4A644E1B5A56C05 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "CoreLocation.framework"; path = "System/Library/Frameworks/CoreLocation.framework"; sourceTree = SDKROOT; fileEncoding = 4; };
+		A3B032A8A607450B81345DA1 /* CDVSplashScreen.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "CDVSplashScreen.m"; path = "cordova-plugin-splashscreen/CDVSplashScreen.m"; sourceTree = "<group>"; fileEncoding = 4; };
+		77B8F3201E98435A96A0256B /* CDVViewController+SplashScreen.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "CDVViewController+SplashScreen.m"; path = "cordova-plugin-splashscreen/CDVViewController+SplashScreen.m"; sourceTree = "<group>"; fileEncoding = 4; };
+		B479FD63CA5D4F03B742E1CE /* CDVSplashScreen.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "CDVSplashScreen.h"; path = "cordova-plugin-splashscreen/CDVSplashScreen.h"; sourceTree = "<group>"; fileEncoding = 4; };
+		CD54B95C211A48FEB030CA47 /* CDVViewController+SplashScreen.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "CDVViewController+SplashScreen.h"; path = "cordova-plugin-splashscreen/CDVViewController+SplashScreen.h"; sourceTree = "<group>"; fileEncoding = 4; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,8 +131,8 @@
 				301BF552109A68D80062928A /* libCordova.a in Frameworks */,
 				288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */,
 				305D5FD1115AB8F900A74A75 /* MobileCoreServices.framework in Frameworks */,
-				649FACE2B16F410291F36798 /* Foundation.framework in Frameworks */,
-				D743CB8C8CF042C495F1D283 /* CoreLocation.framework in Frameworks */,
+				992897DF535B46EE82BFC36B /* Foundation.framework in Frameworks */,
+				8A04944B5A97420C906983AE /* CoreLocation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -205,8 +205,8 @@
 				5B1594DC16A7569C00FEF299 /* AssetsLibrary.framework */,
 				288765FC0DF74451002DB57D /* CoreGraphics.framework */,
 				305D5FD0115AB8F900A74A75 /* MobileCoreServices.framework */,
-				DB07ACC814844A3E8ADA3E7C /* Foundation.framework */,
-				7357A94453644216BDDAB869 /* CoreLocation.framework */,
+				1C72F222364C4E669441F39D /* Foundation.framework */,
+				39CD0E12B4A644E1B5A56C05 /* CoreLocation.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -222,14 +222,14 @@
 		307C750510C5A3420062BCA9 /* Plugins */ = {
 			isa = PBXGroup;
 			children = (
-				6F74E1F2B4C742F2B47B75A3 /* OrientationLock.m */,
-				179E3F2124204DF7B070183B /* OrientationLock.h */,
-				7AFCF9D6275E43B29B510C7E /* CDVLocation.m */,
-				6122AC1A5C5E494CA7E06F83 /* CDVLocation.h */,
-				948EAF86CF874C01A048F27B /* CDVSplashScreen.m */,
-				B8D1E37EA7CE4D3DB38FD4FB /* CDVViewController+SplashScreen.m */,
-				EAF83CB4F4174967B18CC378 /* CDVSplashScreen.h */,
-				389A151D8E3749F29A28C50C /* CDVViewController+SplashScreen.h */,
+				5DD69C250BD544B5A61AF78D /* OrientationLock.m */,
+				2E4B3EAD149444288BD6CA1D /* OrientationLock.h */,
+				F19C6B628048401C99D6A84C /* CDVLocation.m */,
+				418434936D2949ED93A14FDC /* CDVLocation.h */,
+				A3B032A8A607450B81345DA1 /* CDVSplashScreen.m */,
+				77B8F3201E98435A96A0256B /* CDVViewController+SplashScreen.m */,
+				B479FD63CA5D4F03B742E1CE /* CDVSplashScreen.h */,
+				CD54B95C211A48FEB030CA47 /* CDVViewController+SplashScreen.h */,
 			);
 			name = Plugins;
 			path = "App Maipu/Plugins";
@@ -414,10 +414,10 @@
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
 				1D3623260D0F684500981E51 /* AppDelegate.m in Sources */,
 				302D95F114D2391D003F00A1 /* MainViewController.m in Sources */,
-				AE9FCFCDDE564B2C8976C1E2 /* OrientationLock.m in Sources */,
-				CFE531CF9D1C4C41A2E1A970 /* CDVLocation.m in Sources */,
-				0997DB58B9D44D0EB7D63467 /* CDVSplashScreen.m in Sources */,
-				EDAA6C06F4AA4DB38BD2908F /* CDVViewController+SplashScreen.m in Sources */,
+				8AC5BD01BF974072BC4C20C8 /* OrientationLock.m in Sources */,
+				5BF22EA659EB4F6EA3A9652A /* CDVLocation.m in Sources */,
+				0767C1C601B048658837414E /* CDVSplashScreen.m in Sources */,
+				114DF6A3BC2046B081F09539 /* CDVViewController+SplashScreen.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
