@@ -1,0 +1,127 @@
+<div class="fixed-top">
+  <header class="col-xs-12 top-section">
+      <a href="#item2" class="back"> </a>
+      <span>
+        <i class="head-icon tramites"></i>
+        TRÁMITES Y SERVICIOS
+      </span>
+      <a class="pull-right" data-toggle="collapse" href="#search-box-3" aria-expanded="false">
+        <i class="search-icon search"></i>
+      </a>
+  </header>
+  <div class="col-xs-12 collapse wrap-search-box" id="search-box-3">
+    <form action="" id="search-box">
+      <input type="text" placeholder="Buscar..." class="form-control filter" />
+    </form>
+  </div>
+</div>
+<div class="content">
+    <div id="lista-tramites-online" class="">
+       <div class="body-wrap">
+       <div id="loader"></div>
+        <ul class="col-xs-12 collapse-list" id="tramites"> </ul>        
+       </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+$( document ).ready(function() {
+
+      $('#loader').html('<div class="col-xs-12 text-center"><img src="img/preload.gif" class="preload" alt="" width="50"></div>');
+              
+        var myurlEvento = "http://sedam.gotdns.org:8082/SedamWS/SedamService.svc/TransactionServiceOnLineReferences/";  
+        console.log(myurlEvento);
+
+        jQuery.ajax({
+            type: "GET",
+            url: myurlEvento,
+            dataType: "json",
+            contentType: 'application/json',
+            async: false,
+            timeout: 5000,
+            complete: function (response) {                   
+              
+              $('#loader').hide();
+              console.log(response);                  
+
+              var dataJson = JSON.parse(response.responseText);
+              var data = dataJson.Services;
+              
+              console.log(data); 
+              if(typeof data =='object')
+              {                     
+               
+                $("#tramites").empty();                
+
+                $.each(data, function(i, field){                   
+
+                    //Obtener URL
+                    var urlDetalle = $.grep(field.References, function (element, index) {
+                              return element.SrefName == "URL Trámite";
+                              });                                          
+                                  
+                    var listaTramites = '<li>'+
+                      '<div class="collapse-title" data-target="#slide'+  field.SvcsId  +'">'+
+                        '<a href="#item4" data-enlace="tramite-online.html" data-url="' + urlDetalle[0].SrefValue + '" class="e-slide">' +
+                          '<strong>' + field.OrgsName + '</strong>'+
+                          '<p>'+ field.SvcsName +'</p>'+                     
+                        '</a>' +
+                      '</div>'+
+                    '</li>';
+                    $(listaTramites).appendTo("#tramites");      
+
+                    
+
+                  });
+
+              }//FIN Valida que el centro tenga detalle
+              
+
+                      
+          }
+          ,
+          error: function (xhr, ajaxOptions, thrownError) {
+            //alert(xhr.status);
+            var errorNoHayServicio = '<div class="section-title">No es posible mostrar la información por el momento. Por favor intente nuevamente más adelante</div>';
+            $(errorNoHayServicio).appendTo("#tramites");  
+            console.log(xhr.status);
+            console.log(thrownError);
+            console.log(xhr.responseText );
+          }
+        });
+
+
+  $('.e-slide').on('click', function(){
+    $('#wrapper').scrollTo($(this).attr('href'), 500);    
+
+    if ($(this).attr('data-show') != ""){
+      var detalleShow = $(this).attr('data-show');
+      window.detalleUrl = $(this).attr('data-url');
+      $("#" + detalleShow).show();
+
+      console.log(detalleShow);
+    }
+
+    return false;
+  });
+
+  $('a.back').on('click', function () {
+    $('#wrapper').scrollTo($(this).attr('href'), 500);
+    $('#item3 > div').hide();
+    
+    var delDuplicate = $(this).parent().parent().parent().parent().attr('id');
+
+    if(delDuplicate === "item2"){
+      $("#item3, #item4").empty();
+    }
+
+    return false;
+  });
+
+});
+
+</script>
+
+<script type="text/javascript" src="js/functions.js"></script>
+<script type="text/javascript" src="js/search-box.js"></script>

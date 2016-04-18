@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+	<link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+	<link rel="stylesheet" href="css/style.css">
+	<title>Maip&uacute; App</title>	
+</head>
+<body>
+
+	<!-- PORTADA -->
+	<div id="landing">
+		<img src="img/landing.jpg" alt="Maipú crece con orgullo - Cuidad Feliz">
+	</div>
+	<!--  PORTADA -->
+
+<div id="wrapper">
+	<div id="mask">
+		<div id="item1" class="item">
+			<div class="content content-fix">			
+		       <header id="header" class="">
+		            <div class="">
+		                <img src="img/header.png" alt="Maipú crece con orgullo - Cuidad Feliz">
+		            </div>
+		        </header>
+		       <div class="body-wrap">
+		         <div class="row text-center row-menu">
+		            <a href="#item2" data-enlace="lista-tel-emergencia.html" class="col-xs-4 home-icon e-slide">
+		                <span>
+		                    <img src="img/icons/fonos-emergencia.png" alt="">
+		                </span>
+		                <p>Teléfonos de emergencia</p>
+		            </a>
+		            <a href="#item2" data-enlace="lista-tramites-servicios.html" class="col-xs-4 home-icon e-slide">
+		                <span>
+		                    <img src="img/icons/tramites.png" alt="">
+		                </span>
+		                <p>Trámites <br/> y servicios</p>
+		            </a>
+		            <a href="#item2" data-enlace="lista-centro-salud.html" class="col-xs-4 home-icon e-slide">
+		                <span>
+		                    <img src="img/icons/centros-salud.png" alt="">
+		                </span>
+		                <p>Centros <br/> de salud</p>
+		            </a>
+		         </div>
+		         <div class="row text-center row-menu">
+		            <a href="#item2" data-enlace="lista-eventos.html" class="col-xs-4 home-icon e-slide">
+		                <span>
+		                    <img src="img/icons/eventos.png" alt="">
+		                </span>
+		                <p>Eventos <br/> culturales</p>
+		            </a>
+		            <a href="#item2" data-enlace="lista-alcalde-consejales.html" class="col-xs-4 home-icon e-slide">
+		                <span>
+		                    <img src="img/icons/alcalde.png" alt="">
+		                </span>
+		                <p>Alcalde, <br/> consejales</p>
+		            </a>
+		            <a href="#item2" data-enlace="lista-reclamos-denuncias.html" class="col-xs-4 home-icon e-slide">
+		                <span>
+		                    <img src="img/icons/reclamos.png" alt="">
+		                </span>
+		                <p>Reclamos y denuncias</p>
+		            </a>
+		         </div>
+		         <div class="row text-center row-menu">
+		            <a href="#item2" data-enlace="lista-centro-educacion.html"  class="col-xs-4 home-icon e-slide">
+		                <span>
+		                    '<img src="img/icons/centros-educacion.png" alt="" class="home-icon">
+		                </span>
+		                <p>CODEDUC Centros de educación</p>
+		            </a>
+		            <a href="#item2" data-enlace="lista-aguas-municipales.html"  class="col-xs-4 home-icon e-slide">
+		                <span>
+		                    <img src="img/icons/smapa.png" alt="">
+		                </span>
+		                <p>Aguas <br/>Municipales</p>
+		            </a>
+		            <a href="#" class="col-xs-4 home-icon e-slide">
+		                <span>
+		                    <img src="img/icons/ideas.png" alt="">
+		                </span>
+		                <p>¿Tienes una idea para tu barrio?</p>
+		            </a>
+		         </div>
+		       </div>
+			<!--portada-->
+
+			</div>
+		</div>
+		
+		<div id="item2" class="item">
+			<div class="content">
+				<div class="col-xs-12 text-center">
+					<img src="img/preload.gif" class="preload" alt="" width="50">
+				</div>
+			</div>
+		</div>
+		<div id="item3" class="item"></div>
+		<div id="item4" class="item"></div>
+		
+	</div>
+</div>
+
+<footer id="footer">
+  <div class="row text-center home-icon">
+    <div class="col-xs-3">
+        <a href="#"><img src="img/icons/mail.png" alt=""></a>
+    </div>
+    <div class="col-xs-3">
+        <a href="https://www.facebook.com/municipalidadmaipuchile" target="_blank"><img src="img/icons/face.png" alt=""></a>
+    </div>
+    <div class="col-xs-3">
+        <a href="https://www.youtube.com/user/MunicipalidadMaipu" target="_blank"><img src="img/icons/youtube.png" alt=""></a>
+    </div>
+    <div class="col-xs-3">
+        <a href="https://twitter.com/maipu_chile" target="_blank"><img src="img/icons/twitter.png" alt=""></a>
+    </div>
+  </div>
+</footer>
+	<script type="text/javascript" src="js/jquery-2.2.1.min.js"></script>
+	<script type="text/javascript" src="js/jquery.scrollTo.js"></script>
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="js/functions.js"></script>
+	<script type="text/javascript" src="js/search-box.js"></script>
+	<script type="text/javascript" src="js/jquery.nicescroll.js"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&callback=success"></script>
+</body>
+</html>

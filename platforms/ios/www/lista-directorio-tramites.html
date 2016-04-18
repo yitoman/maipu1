@@ -1,0 +1,158 @@
+<div class="fixed-top">
+  <header class="col-xs-12 top-section">
+      <a href="#item2" class="back"> </a>
+      <span>
+        <i class="head-icon tramites"></i>
+        TRÁMITES Y SERVICIOS
+      </span>
+      <a class="pull-right" data-toggle="collapse" href="#search-box-3" aria-expanded="false">
+        <i class="search-icon search"></i>
+      </a>
+  </header>
+  <div class="col-xs-12 collapse wrap-search-box" id="search-box-3">
+    <form action="" id="search-box">
+      <input type="text" placeholder="Buscar..." class="form-control filter" />
+    </form>
+  </div>
+</div>
+<div class="content">
+    <div id="lista-directorio-tramite" class="">
+       <div class="body-wrap">
+        <ul class="col-xs-12 collapse-list" id="tramites"> </ul>        
+       </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+$( document ).ready(function() {
+
+    var myurl = "http://sedam.gotdns.org:8082/SedamWS/SedamService.svc/TransactionOrganizations";
+        
+    jQuery.ajax({
+          type: "GET",
+          url: myurl,
+          dataType: "json",
+          contentType: 'application/json',
+          async: false,
+          success: function (response) {
+            console.log(response);
+            
+            if(typeof response =='object')
+            {
+                var data = response.Organizations;
+                $("#tramites").empty();                
+
+                $.each(data, function(i, field){                   
+                
+                    var listaOrganizaciones = '<li>'+
+                    '<a href="#" class="collapse-title" data-toggle="collapse" data-target="#group'+  field.OrgsId  +'">'+
+                        '<strong>' + field.OrgsName + '</strong>'+
+                        '<p>'+ field.OrgsDesc +'</p>'+
+                    '</a>'+
+                  '<ul id="group' + field.OrgsId + '" class="collapse list-arrow mini" ></ul>'+
+                  '</li>';
+                   $(listaOrganizaciones).appendTo("#tramites");                                       
+
+              
+            var myurlEvento = "http://sedam.gotdns.org:8082/SedamWS/SedamService.svc/TransactionServiceReferences/"+field.OrgsId+"/";
+            console.log(myurlEvento);
+
+            jQuery.ajax({
+                type: "GET",
+                url: myurlEvento,
+                dataType: "json",
+                contentType: 'application/json',
+                async: false,
+                timeout: 5000,
+                complete: function (responseListaTramites) {                   
+                  
+                  console.log(responseListaTramites);                  
+
+                  var responseDataJson = JSON.parse(responseListaTramites.responseText);
+                  var responseData = responseDataJson.Services;
+                  
+                  console.log(responseData); 
+                  if(typeof responseData =='object')
+                  {                         
+                   
+                    //Loop lista de tramites de la organizacion
+                    $.each(responseData, function(i, subfield){   
+                      var listaTramites = 
+                            '<li>'+
+                                '<a href="#item4" id="'+ subfield.SvcsId +'" data-show="detail-tramite-'+ subfield.SvcsId +'" data-id="'+subfield.OrgsId+'" class="slide-title e-slide">'+
+                                    '<span>' + subfield.SvcsName + '</span>'+
+                                '</a>'+
+                            '</li>';
+
+                            $(listaTramites).appendTo("#group" + field.OrgsId);
+
+                      }); //Fin Loop lista de tramites de la organizacion
+
+                  }//FIN Valida que el centro tenga detalle
+                  
+                }
+
+              });
+
+              });  
+
+            } 
+            else
+            {
+
+            var errorFormatoData = '<div class="section-title">No es posible mostrar la información por el momento. Por favor intente nuevamente más adelante</div>';
+               $(errorFormatoData).appendTo("#tramites");  
+
+                var errorType = "Respuesta no es en el formato correcto";
+                //alert(errorType);
+                console.log(errorType);
+            }
+
+          }
+          ,
+          error: function (xhr, ajaxOptions, thrownError) {
+            //alert(xhr.status);
+            var errorNoHayServicio = '<div class="section-title">No es posible mostrar la información por el momento. Por favor intente nuevamente más adelante</div>';
+            $(errorNoHayServicio).appendTo("#tramites");  
+            console.log(xhr.status);
+            console.log(thrownError);
+            console.log(xhr.responseText );
+          }
+        });
+
+
+  $('.e-slide').on('click', function(){
+    $('#wrapper').scrollTo($(this).attr('href'), 500);    
+
+    if ($(this).attr('data-show') != ""){
+      var detalleShow = $(this).attr('data-show');
+      $("#" + detalleShow).show();
+    }
+
+    return false;
+  });
+
+  $('a.back').on('click', function () {
+    $('#wrapper').scrollTo($(this).attr('href'), 500);
+    $('#item3 > div').hide();
+    
+    var delDuplicate = $(this).parent().parent().parent().parent().attr('id');
+
+    if(delDuplicate === "item2"){
+      $("#item3").empty();
+    }
+
+    return false;
+  });
+
+  $(".slide-title").on('click', function(){
+    window.tramiteId = $(this).attr('data-id');
+    window.detailId = $(this).attr('id');
+        $("#item4").load('detalle-tramites.html');
+    });
+
+});
+
+</script>
+<script type="text/javascript" src="js/search-box.js"></script>

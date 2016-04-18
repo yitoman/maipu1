@@ -1,0 +1,63 @@
+<div class="fixed-top">
+  <header class="col-xs-12 top-section">
+      <a href="#item1" class="back"> </a>
+      <span>
+        <i class="head-icon tramites"></i>
+        TRÁMITES Y SERVICIOS
+      </span>
+      <a class="pull-right" data-toggle="collapse" href="#search-box-2" aria-expanded="false">
+        <i class="search-icon search"></i>
+      </a>
+  </header>
+  <div class="col-xs-12 collapse wrap-search-box" id="search-box-2">
+    <form action="" id="search-box">
+      <input type="text" placeholder="Buscar..." class="form-control filter" />
+    </form>
+  </div>
+</div>
+<div class="content">
+    <div id="lista-tramites" class="">
+       <div class="body-wrap">
+        <div class="col-xs-12 no-padding">
+          <img src="img/headers/tramites-header.jpg" class="img-responsive" alt="">
+        </div>
+        <ul class="col-xs-12 collapse-list orange-list text-center" id="servicios">
+          <li>
+            <a href="#item3" data-enlace="lista-tramites-online.html" class="slide-title e-slide">
+              <span>Tramites OnLine</span> 
+            </a>
+          </li>
+          <li>
+            <a href="#item3" data-enlace="lista-directorio-tramites.html" class="slide-title e-slide">
+              <span>Directorio de Tramites</span> 
+            </a>
+          </li>
+         </ul>        
+       </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+$( document ).ready(function() {
+
+  $('.e-slide').on('click', function(){
+    enlace = $(this).attr('data-enlace');
+    item   = $(this).attr('href');
+    $(item).load(enlace);
+
+    $('#wrapper').scrollTo($(this).attr('href'), 500);    
+    
+    return false;
+  });
+
+  $('a.back').on('click', function () {
+    $('#wrapper').scrollTo($(this).attr('href'), 500);
+
+    return false;
+  });
+
+});
+
+</script>
+<script type="text/javascript" src="js/search-box.js"></script>
