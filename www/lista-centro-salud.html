@@ -54,10 +54,10 @@ $( document ).ready(function() {
                       organizaciones.push(nombreOrganizacion);
 
                       var listaOrganizaciones = '<li>'+
-                      '<div class="slide-title" data-toggle="collapse" data-target="#slide'+  field.OrgsId  +'">'+
+                      '<a href="#" class="slide-title" data-toggle="collapse" data-target="#slide'+  field.OrgsId  +'">'+
                           '<span>' + nombreOrganizacion + '</span>'+                      
-                      '</div>'+
-                    '<ul id="slide' + field.OrgsId + '" class="collapse in" ></ul>'+
+                      '</a>'+
+                    '<ul id="slide' + field.OrgsId + '" class="collapse" ></ul>'+
                     '</li>';
                      $(listaOrganizaciones).appendTo("#servicios");                                       
 
@@ -136,3 +136,4 @@ $( document ).ready(function() {
 });
 
 </script>
+<script type="text/javascript" src="js/search-box.js"></script>
