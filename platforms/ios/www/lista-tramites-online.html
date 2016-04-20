@@ -26,10 +26,23 @@
 
 <script type="text/javascript">
 
+$(document).ajaxStart(function () {
+
+     spinnerplugin.show({
+      overlay: false,    // defaults to true
+      fullscreen: true,  // defaults to false
+  });
+
+});
+
+$(document).ajaxStop(function () {
+   spinnerplugin.hide();
+});
+
+
 $( document ).ready(function() {
 
-      $('#loader').html('<div class="col-xs-12 text-center"><img src="img/preload.gif" class="preload" alt="" width="50"></div>');
-              
+
         var myurlEvento = "http://sedam.gotdns.org:8082/SedamWS/SedamService.svc/TransactionServiceOnLineReferences/";  
         console.log(myurlEvento);
 
@@ -42,7 +55,6 @@ $( document ).ready(function() {
             timeout: 5000,
             complete: function (response) {                   
               
-              $('#loader').hide();
               console.log(response);                  
 
               var dataJson = JSON.parse(response.responseText);
