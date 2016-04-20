@@ -2,6 +2,19 @@
 //   $('#landing').fadeOut();
 // }, 5000);
 
+$(document).ajaxStart(function () {
+
+     spinnerplugin.show({
+      overlay: false,    // defaults to true
+      fullscreen: true,  // defaults to false
+  });
+
+});
+
+$(document).ajaxStop(function () {
+   spinnerplugin.hide();
+});
+
 $(document).ready(function() {
 
 	$('a.e-slide').on('click', function () {
