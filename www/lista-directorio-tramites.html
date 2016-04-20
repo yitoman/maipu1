@@ -25,11 +25,6 @@
 
 <script type="text/javascript">
 
-  spinnerplugin.show({
-      overlay: false,    // defaults to true
-      timeout: 0,       // defaults to 0 (no timeout)
-      fullscreen: true,  // defaults to false
-  });
 
 
 $( document ).ready(function() {
@@ -128,7 +123,7 @@ $( document ).ready(function() {
           }
         });
 
- spinnerplugin.hide();
+
  
   $('.e-slide').on('click', function(){
     $('#wrapper').scrollTo($(this).attr('href'), 500);    
