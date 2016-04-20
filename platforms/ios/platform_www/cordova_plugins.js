@@ -33,19 +33,19 @@ module.exports = [
         ]
     },
     {
-        "file": "plugins/cordova-plugin-spinner-dialog/www/spinner.js",
-        "id": "cordova-plugin-spinner-dialog.SpinnerDialog",
-        "pluginId": "cordova-plugin-spinner-dialog",
-        "merges": [
-            "window.plugins.spinnerDialog"
-        ]
-    },
-    {
         "file": "plugins/cordova-plugin-splashscreen/www/splashscreen.js",
         "id": "cordova-plugin-splashscreen.SplashScreen",
         "pluginId": "cordova-plugin-splashscreen",
         "clobbers": [
             "navigator.splashscreen"
+        ]
+    },
+    {
+        "file": "plugins/it.mobimentum.phonegapspinnerplugin/www/spinnerplugin.js",
+        "id": "it.mobimentum.phonegapspinnerplugin.SpinnerPlugin",
+        "pluginId": "it.mobimentum.phonegapspinnerplugin",
+        "clobbers": [
+            "window.spinnerplugin"
         ]
     }
 ];
@@ -53,9 +53,9 @@ module.exports.metadata =
 // TOP OF METADATA
 {
     "cordova-plugin-geolocation": "2.1.0",
-    "cordova-plugin-spinner-dialog": "1.3.1",
     "cordova-plugin-splashscreen": "3.1.0",
-    "cordova-plugin-whitelist": "1.2.0"
+    "cordova-plugin-whitelist": "1.2.0",
+    "it.mobimentum.phonegapspinnerplugin": "1.2.1"
 }
 // BOTTOM OF METADATA
 });

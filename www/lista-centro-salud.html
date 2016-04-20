@@ -27,6 +27,12 @@
 
 $( document ).ready(function() {
 
+    spinnerplugin.show({
+    overlay: false,    // defaults to true
+    timeout: 30,       // defaults to 0 (no timeout)
+    fullscreen: true,  // defaults to false
+});
+
     var myurl = "http://sedam.gotdns.org:8082/SedamWS/SedamService.svc/HealthcareReferences";
         
     jQuery.ajax({

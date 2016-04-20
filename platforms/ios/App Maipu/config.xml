@@ -57,6 +57,7 @@
     <gap:plugin name="org.apache.cordova.network-information" />
     <gap:plugin name="org.apache.cordova.splashscreen" />
     <gap:plugin name="org.apache.cordova.vibration" />
+    <gap:plugin name="it.mobimentum.phonegapspinnerplugin" />
     <icon src="icon.png" />
     <icon gap:platform="android" gap:qualifier="ldpi" src="www/res/icon/android/icon-36-ldpi.png" />
     <icon gap:platform="android" gap:qualifier="mdpi" src="www/res/icon/android/icon-48-mdpi.png" />
@@ -92,11 +93,11 @@
     <feature name="Geolocation">
         <param name="ios-package" value="CDVLocation" />
     </feature>
-    <feature name="SpinnerDialog">
-        <param name="ios-package" value="CDVSpinnerDialog" />
-    </feature>
     <feature name="SplashScreen">
         <param name="ios-package" value="CDVSplashScreen" />
         <param name="onload" value="true" />
+    </feature>
+    <feature name="SpinnerPlugin">
+        <param name="ios-package" value="SpinnerPlugin" />
     </feature>
 </widget>
