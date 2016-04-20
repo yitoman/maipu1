@@ -9,7 +9,7 @@ $(document).ready(function() {
 		enlace = $(this).attr('data-enlace');
 		item   = $(this).attr('href');
 
-		$(document).ajaxStart(function () {
+		$(item).ajaxStart(function () {
 
 	     spinnerplugin.show({
 	      overlay: false,    // defaults to true
@@ -21,7 +21,7 @@ $(document).ready(function() {
 		$(item).load(enlace);
 		//console.log("direcciones: " + enlace+ " - " +item);
 
-		$(document).ajaxStop(function () {
+		$(item).ajaxStop(function () {
 		   spinnerplugin.hide();
 		});
 
