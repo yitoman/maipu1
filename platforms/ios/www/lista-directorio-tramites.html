@@ -29,7 +29,12 @@ $( document ).ready(function() {
 
     var myurl = "http://sedam.gotdns.org:8082/SedamWS/SedamService.svc/TransactionOrganizations";
     
-    spinnerplugin.show();
+        spinnerplugin.show({
+            overlay: false,    // defaults to true
+            timeout: 0,       // defaults to 0 (no timeout)
+            fullscreen: true,  // defaults to false
+        });
+
 
     jQuery.ajax({
           type: "GET",
