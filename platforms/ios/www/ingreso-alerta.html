@@ -240,17 +240,22 @@ $("form#data").submit(function(){
     var formData = new FormData($(this)[0]);
     var url = 'http://sedam.gotdns.org:8082/SedamWS/SedamService.svc/Alert2';
 
-      spinnerplugin.show({
-          overlay: false,    // defaults to true
-          timeout: 0,       // defaults to 0 (no timeout)
-          fullscreen: true,  // defaults to false
-      });
+     
 
 	    $.ajax({
 	        url: url,
 	        type: 'POST',
 	        data: formData,
 	        async: false,
+          beforeSend: function(){
+
+              spinnerplugin.show({
+                  overlay: false,    // defaults to true
+                  timeout: 0,       // defaults to 0 (no timeout)
+                  fullscreen: true,  // defaults to false
+              });
+
+          },
 	        success: function (data) {
 
 	        	var pattern = /<body[^>]*>((.|[\n\r])*)<\/body>/im
@@ -266,7 +271,10 @@ $("form#data").submit(function(){
 
 				}
 				else
-				{          
+				{      
+
+          spinnerplugin.hide();
+
           $('#modalId').text("Denuncia enviada correctamente");       
           modal.style.display = "block";
 
@@ -281,6 +289,7 @@ $("form#data").submit(function(){
 			            console.log(xhrListaEvento.status);
 			            console.log(thrownError);
 			            console.log(xhrListaEvento.responseText);
+                  spinnerplugin.hide();
 			            alert("Lo sentimos, su denuncia no pudo se ingresada.")
 			        }
 	    });
