@@ -1,6 +1,6 @@
-setTimeout(function(){
-  $('#landing').fadeOut();
-}, 5000);
+// setTimeout(function(){
+//   $('#landing').fadeOut();
+// }, 5000);
 
 $(document).ready(function() {
 
