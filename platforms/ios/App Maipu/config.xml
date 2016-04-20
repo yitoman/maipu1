@@ -96,4 +96,7 @@
         <param name="ios-package" value="CDVSplashScreen" />
         <param name="onload" value="true" />
     </feature>
+    <feature name="ActivityIndicator">
+        <param name="ios-package" value="ActivityIndicator" />
+    </feature>
 </widget>

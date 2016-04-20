@@ -28,7 +28,9 @@
 $( document ).ready(function() {
 
     var myurl = "http://sedam.gotdns.org:8082/SedamWS/SedamService.svc/TransactionOrganizations";
-        
+    
+    ActivityIndicator.show();
+
     jQuery.ajax({
           type: "GET",
           url: myurl,
@@ -54,7 +56,8 @@ $( document ).ready(function() {
                   '</li>';
                    $(listaOrganizaciones).appendTo("#tramites");                                       
 
-              
+            ActivityIndicator.hide();
+
             var myurlEvento = "http://sedam.gotdns.org:8082/SedamWS/SedamService.svc/TransactionServiceReferences/"+field.OrgsId+"/";
             console.log(myurlEvento);
 

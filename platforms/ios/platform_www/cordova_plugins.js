@@ -39,6 +39,14 @@ module.exports = [
         "clobbers": [
             "navigator.splashscreen"
         ]
+    },
+    {
+        "file": "plugins/org.apache.cordova.plugin.ActivityIndicator/www/activityIndicator.js",
+        "id": "org.apache.cordova.plugin.ActivityIndicator.ActivityIndicator",
+        "pluginId": "org.apache.cordova.plugin.ActivityIndicator",
+        "clobbers": [
+            "ActivityIndicator"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -46,7 +54,8 @@ module.exports.metadata =
 {
     "cordova-plugin-geolocation": "2.1.0",
     "cordova-plugin-splashscreen": "3.1.0",
-    "cordova-plugin-whitelist": "1.2.0"
+    "cordova-plugin-whitelist": "1.2.0",
+    "org.apache.cordova.plugin.ActivityIndicator": "1.0.0"
 }
 // BOTTOM OF METADATA
 });
