@@ -25,17 +25,17 @@
 
 <script type="text/javascript">
 
+  spinnerplugin.show({
+      overlay: false,    // defaults to true
+      timeout: 0,       // defaults to 0 (no timeout)
+      fullscreen: true,  // defaults to false
+  });
+
+
 $( document ).ready(function() {
 
     var myurl = "http://sedam.gotdns.org:8082/SedamWS/SedamService.svc/TransactionOrganizations";
     
-        spinnerplugin.show({
-            overlay: false,    // defaults to true
-            timeout: 0,       // defaults to 0 (no timeout)
-            fullscreen: true,  // defaults to false
-        });
-
-
     jQuery.ajax({
           type: "GET",
           url: myurl,
@@ -61,8 +61,7 @@ $( document ).ready(function() {
                   '</li>';
                    $(listaOrganizaciones).appendTo("#tramites");                                       
 
-           spinnerplugin.hide();
-
+          
             var myurlEvento = "http://sedam.gotdns.org:8082/SedamWS/SedamService.svc/TransactionServiceReferences/"+field.OrgsId+"/";
             console.log(myurlEvento);
 
@@ -129,7 +128,8 @@ $( document ).ready(function() {
           }
         });
 
-
+ spinnerplugin.hide();
+ 
   $('.e-slide').on('click', function(){
     $('#wrapper').scrollTo($(this).attr('href'), 500);    
 
