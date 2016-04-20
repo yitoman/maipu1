@@ -2,26 +2,29 @@
 //   $('#landing').fadeOut();
 // }, 5000);
 
-$(document).ajaxStart(function () {
-
-     spinnerplugin.show({
-      overlay: false,    // defaults to true
-      fullscreen: true,  // defaults to false
-  });
-
-});
-
-$(document).ajaxStop(function () {
-   spinnerplugin.hide();
-});
 
 $(document).ready(function() {
 
 	$('a.e-slide').on('click', function () {
 		enlace = $(this).attr('data-enlace');
 		item   = $(this).attr('href');
+
+		$(document).ajaxStart(function () {
+
+	     spinnerplugin.show({
+	      overlay: false,    // defaults to true
+	      fullscreen: true,  // defaults to false
+		  });
+
+		});
+
 		$(item).load(enlace);
 		//console.log("direcciones: " + enlace+ " - " +item);
+
+		$(document).ajaxStop(function () {
+		   spinnerplugin.hide();
+		});
+
 
 		$('#wrapper').scrollTo($(this).attr('href'), 500);		
 		
