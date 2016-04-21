@@ -110,6 +110,8 @@ $( document ).ready(function() {
                 console.log(errorType);
             }
 
+spinnerplugin.hide();
+
           }
           ,
           error: function (xhr, ajaxOptions, thrownError) {
@@ -119,6 +121,7 @@ $( document ).ready(function() {
             console.log(xhr.status);
             console.log(thrownError);
             console.log(xhr.responseText );
+            spinnerplugin.hide();
           }
         });
 
