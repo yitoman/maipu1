@@ -2,18 +2,18 @@
 //   $('#landing').fadeOut();
 // }, 5000);
 
-		$(document).ajaxStart(function () {
+$(document).ajaxStart(function () {
 
-	     spinnerplugin.show({
-	      overlay: false,    // defaults to true
-	      fullscreen: true,  // defaults to false
-		  });
+ spinnerplugin.show({
+  overlay: false,    // defaults to true
+  fullscreen: true,  // defaults to false
+  });
 
-		});
+});
 
-		$(document).ajaxStop(function () {
-		   spinnerplugin.hide();
-		});
+$(document).ajaxStop(function () {
+   spinnerplugin.hide();
+});
 
 
 $(document).ready(function() {
