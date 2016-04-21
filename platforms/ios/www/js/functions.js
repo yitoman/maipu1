@@ -2,7 +2,7 @@
 //   $('#landing').fadeOut();
 // }, 5000);
 
-$(document).ajaxStart(function () {
+/*$(document).ajaxStart(function () {
 
  spinnerplugin.show({
   overlay: false,    // defaults to true
@@ -14,7 +14,7 @@ $(document).ajaxStart(function () {
 $(document).ajaxStop(function () {
    spinnerplugin.hide();
 });
-
+*/
 
 $(document).ready(function() {
 
