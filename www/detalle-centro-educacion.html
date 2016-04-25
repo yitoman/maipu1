@@ -82,8 +82,6 @@ $( document ).ready(function() {
                     }
 
                     //Obtener URL
-                    var ref = cordova.InAppBrowser.open('http://apache.org', '_blank', 'location=yes');
-
                     var sitioWeb = $.grep(field.References, function (element, index) {
                       return element.OrefName == "URL";
                     });
