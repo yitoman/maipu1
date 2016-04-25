@@ -1,4 +1,9 @@
 <script type="text/javascript">
+document.addEventListener("deviceready", onDeviceReady, false);
+function onDeviceReady() {
+    window.open = cordova.InAppBrowser.open;
+}
+
 $( document ).ready(function() {
 
   var idCentro = window.idCentro;
@@ -81,12 +86,17 @@ $( document ).ready(function() {
                     }
 
                     //Obtener URL
+                    var ref = cordova.InAppBrowser.open('http://apache.org', '_blank', 'location=yes');
+
                     var sitioWeb = $.grep(field.References, function (element, index) {
                       return element.OrefName == "URL";
                     });
                     if(typeof sitioWeb =='object' && sitioWeb[0])
                     {
-                      detalleCentro =  detalleCentro + '<div class="section-title">Sitio Web</div><div class="section-description"><a href="' + sitioWeb[0].OrefValue +'" target="_blank">' + sitioWeb[0].OrefValue +'</a></div>';
+                      //detalleCentro =  detalleCentro + '<div class="section-title">Sitio Web</div><div class="section-description"><a href="' + sitioWeb[0].OrefValue +'" target="_blank">' + sitioWeb[0].OrefValue +'</a></div>';
+                      detalleCentro =  detalleCentro +
+                       '<div class="section-title">Sitio Web</div>' + 
+                       '<div class="section-description"><a href="' + ref +'" target="_blank">' + sitioWeb[0].OrefValue +'</a></div>';
                     }
 
                     //Obtener la descripción y validar para incluirlo en la vista
