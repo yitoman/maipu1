@@ -13,15 +13,11 @@
                             "count": 1
                         },
                         {
-                            "xml": "<feature name=\"SplashScreen\"><param name=\"ios-package\" value=\"CDVSplashScreen\" /><param name=\"onload\" value=\"true\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"SpinnerPlugin\"><param name=\"ios-package\" value=\"SpinnerPlugin\" /></feature>",
-                            "count": 1
-                        },
-                        {
                             "xml": "<feature name=\"InAppBrowser\"><param name=\"ios-package\" value=\"CDVInAppBrowser\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"SplashScreen\"><param name=\"ios-package\" value=\"CDVSplashScreen\" /><param name=\"onload\" value=\"true\" /></feature>",
                             "count": 1
                         }
                     ]
@@ -43,16 +39,13 @@
         "cordova-plugin-geolocation": {
             "PACKAGE_NAME": "com.phonegap.helloworld"
         },
+        "cordova-plugin-inappbrowser": {
+            "PACKAGE_NAME": "com.phonegap.helloworld"
+        },
         "cordova-plugin-splashscreen": {
             "PACKAGE_NAME": "com.phonegap.helloworld"
         },
         "cordova-plugin-whitelist": {
-            "PACKAGE_NAME": "com.phonegap.helloworld"
-        },
-        "it.mobimentum.phonegapspinnerplugin": {
-            "PACKAGE_NAME": "com.phonegap.helloworld"
-        },
-        "cordova-plugin-inappbrowser": {
             "PACKAGE_NAME": "com.phonegap.helloworld"
         }
     },
@@ -91,22 +84,6 @@
             ]
         },
         {
-            "file": "plugins/cordova-plugin-splashscreen/www/splashscreen.js",
-            "id": "cordova-plugin-splashscreen.SplashScreen",
-            "pluginId": "cordova-plugin-splashscreen",
-            "clobbers": [
-                "navigator.splashscreen"
-            ]
-        },
-        {
-            "file": "plugins/it.mobimentum.phonegapspinnerplugin/www/spinnerplugin.js",
-            "id": "it.mobimentum.phonegapspinnerplugin.SpinnerPlugin",
-            "pluginId": "it.mobimentum.phonegapspinnerplugin",
-            "clobbers": [
-                "window.spinnerplugin"
-            ]
-        },
-        {
             "file": "plugins/cordova-plugin-inappbrowser/www/inappbrowser.js",
             "id": "cordova-plugin-inappbrowser.inappbrowser",
             "pluginId": "cordova-plugin-inappbrowser",
@@ -114,13 +91,20 @@
                 "cordova.InAppBrowser.open",
                 "window.open"
             ]
+        },
+        {
+            "file": "plugins/cordova-plugin-splashscreen/www/splashscreen.js",
+            "id": "cordova-plugin-splashscreen.SplashScreen",
+            "pluginId": "cordova-plugin-splashscreen",
+            "clobbers": [
+                "navigator.splashscreen"
+            ]
         }
     ],
     "plugin_metadata": {
         "cordova-plugin-geolocation": "2.1.0",
+        "cordova-plugin-inappbrowser": "1.4.0",
         "cordova-plugin-splashscreen": "3.1.0",
-        "cordova-plugin-whitelist": "1.2.0",
-        "it.mobimentum.phonegapspinnerplugin": "1.2.1",
-        "cordova-plugin-inappbrowser": "1.4.0"
+        "cordova-plugin-whitelist": "1.2.0"
     }
 }
