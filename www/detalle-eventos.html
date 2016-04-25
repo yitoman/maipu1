@@ -61,10 +61,24 @@ $( document ).ready(function() {
                 console.log(responseData.Events);
 
          $.each(responseData.Events, function(j, dataListaEventos){
-            var fechaInicio = dataListaEventos.EvntIniDate;
-            var fechaInicio = $.trim(fechaInicio).substring(0, 10);
-            var fechaTermino = dataListaEventos.EvntEndDate;
-            var fechaTermino = $.trim(fechaTermino).substring(0, 10);
+
+            //var arr = data.split('/');
+            //$("#date").html("<span>"+arr[0] + "</span></br>" + arr[1]+"/"+arr[2]);
+            //var fechaInicio = $.trim(fechaInicio).substring(0, 10);
+
+            var dataInicio  = dataListaEventos.EvntIniDate;
+            var dataInicio  = dataInicio.split(' ');
+            var fechaInicio = dataInicio[0];
+            var diaInicio   = fechaInicio.split('/');
+            var horaInicio  = dataInicio[1];
+            var horaInicio  = horaInicio.split(':');    
+
+            var dataTermino = dataListaEventos.EvntEndDate;
+            var dataTermino  = dataTermino.split(' ');
+            var fechaTermino = dataTermino[0];
+            var diaTermino   = fechaTermino.split('/');
+            var horaTermino  = dataTermino[1];
+            var horaTermino  = horaTermino.split(':');
 
 
             listaEventos =  listaEventos + 
@@ -72,8 +86,10 @@ $( document ).ready(function() {
               '<a href="#item4" data-show="detalle-uni-'+dataListaEventos.EvntId+'" class="e-slide">' +  dataListaEventos.EvntName + '</a>'+
               '<div class="section-title min-description">' + 
                 '<a href="#item4" data-show="detalle-uni-'+dataListaEventos.EvntId+'" class="e-slide"><small>'+
-                  '<i>Fecha de inicio: ' + fechaInicio + '<br />' +
-                  'Fecha de término: ' + fechaTermino + '</i>' +
+                  '<i>Fecha de inicio: ' + diaInicio[1] + "/" + diaInicio[0] + "/" + diaInicio[2] + ' - ' +
+                   horaInicio[0] + ':' + horaInicio[1] + ' ' + dataInicio[2] + '<br />' +
+                  'Fecha de término: ' + diaTermino[1] + "/" + diaTermino[0] + "/" + diaTermino[2] + ' - ' +
+                   horaInicio[0] + ':' + horaTermino[1] + ' ' + dataTermino[2] + "</i>" +
                 '</small></a>'+
               '</div>';
                         detalleEvento =  detalleEvento +
@@ -96,7 +112,10 @@ $( document ).ready(function() {
                             '<ul class="striped">'+
                               '<li>' + dataListaEventos.EvntDesc + '</li>' +
                               '<li>Horarios:</li>' +
-                              '<li>' + dataListaEventos.EvntIniDate + " - " + dataListaEventos.EvntEndDate + '</li>';
+                              '<li><b>Fecha de inicio</b>: ' + diaInicio[1] + "/" + diaInicio[0] + "/" + diaInicio[2] + ' - ' +
+                   horaInicio[0] + ':' + horaInicio[1] + ' ' + dataInicio[2] + '<br />' +
+                  '<b>Fecha de término</b>: ' + diaTermino[1] + "/" + diaTermino[0] + "/" + diaTermino[2] + ' - ' +
+                   horaInicio[0] + ':' + horaTermino[1] + ' ' + dataTermino[2] + '</li>';
 
                       //Obtener el precio 
                       var precioDetalle = $.grep(dataListaEventos.References, function (element, index) {

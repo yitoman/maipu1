@@ -34,6 +34,9 @@ $( document ).ready(function() {
             $.each(responseData.Organizations, function(i, subfield){
                 if(subfield.OrgsId == idCentro){
 
+                  desOrganizacion = desOrganizacion.split('\n').join('</br>');
+                  
+
                   var detalleCentro = '<div id="detail-salud-' + idCentro +'" class="item-detalle">'+
                   '<div class="fixed-top">'+
                     '<header id="header" class="col-xs-12 top-section">'+
@@ -79,7 +82,9 @@ $( document ).ready(function() {
                                           });
                   if(typeof directorDetalle  =='object' && directorDetalle[0])
                   {
-                    detalleCentro =  detalleCentro + '<div class="section-title border-tb-darkgris">' + directorDetalle[0].OrefValue +'</div>';
+                    detalleCentro =  detalleCentro +
+                     '<div class="section-title border-tb-darkgris">Director</div>'+
+                     '<div class="section-description">' + directorDetalle[0].OrefValue +'</div>';
                   }
 
 
@@ -96,7 +101,7 @@ $( document ).ready(function() {
                      '</div>';
                   }
 
-                      detalleCentro =  detalleCentro + '<div class="section-title">Descripción</div><div class="section-description"><pre>' + desOrganizacion +'</pre></div>';
+                      detalleCentro =  detalleCentro + '<div class="section-title">Servicios</div><div class="section-description">' + desOrganizacion +'</div>';
 
                   detalleCentro =  detalleCentro + 
                       '</div>' +
