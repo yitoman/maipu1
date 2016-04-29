@@ -55,9 +55,7 @@ $( document ).ready(function() {
                 $.each(data, function(i, field){                   
 
                     //Obtener URL
-                    var urlDetalle = $.grep(field.References, function (element, index) {
-                              return element.SrefName == "URL Trámite";
-                              });                                          
+                    var urlDetalle = field.References;
                                   
                     var listaTramites = '<li>'+
                       '<div class="collapse-title" data-target="#slide'+  field.SvcsId  +'">'+

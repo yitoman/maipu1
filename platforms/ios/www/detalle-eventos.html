@@ -78,6 +78,7 @@ $( document ).ready(function() {
             var fechaTermino = dataTermino[0];
             var diaTermino   = fechaTermino.split('/');
             var horaTermino  = dataTermino[1];
+            console.log(horaTermino);
             var horaTermino  = horaTermino.split(':');
 
 
@@ -89,7 +90,7 @@ $( document ).ready(function() {
                   '<i>Fecha de inicio: ' + diaInicio[1] + "/" + diaInicio[0] + "/" + diaInicio[2] + ' - ' +
                    horaInicio[0] + ':' + horaInicio[1] + ' ' + dataInicio[2] + '<br />' +
                   'Fecha de término: ' + diaTermino[1] + "/" + diaTermino[0] + "/" + diaTermino[2] + ' - ' +
-                   horaInicio[0] + ':' + horaTermino[1] + ' ' + dataTermino[2] + "</i>" +
+                   horaTermino[0] + ':' + horaTermino[1] + ' ' + dataTermino[2] + "</i>" +
                 '</small></a>'+
               '</div>';
                         detalleEvento =  detalleEvento +

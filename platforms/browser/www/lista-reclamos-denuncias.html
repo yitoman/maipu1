@@ -1,0 +1,115 @@
+<div class="fixed-top">
+  <header class="col-xs-12 top-section">
+      <a href="#item1" class="back"> </a>        
+      <span>
+        <i class="head-icon reclamos"></i>
+        RECLAMOS Y DENUNCIAS
+      </span>
+      <a class="pull-right" data-toggle="collapse" href="#search-box" aria-expanded="false">
+        <i class="search-icon search"></i>
+      </a>
+  </header>
+  <div class="col-xs-12 collapse wrap-search-box" id="search-box">
+    <form action="" id="search-box">
+      <input type="text" placeholder="Buscar..." class="form-control filter" />
+    </form>
+  </div>
+</div>
+<div class="content">
+    <div id="lista-reclamos-denuncias" class="">
+       <div class="body-wrap">
+        <div id="loader"></div>        
+        <ul class="col-xs-12 collapse-list orange-list" id="servicios"> </ul>        
+       </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+$( document ).ready(function() {
+      $('#loader').html('<div class="col-xs-12 text-center"><img src="img/preload.gif" class="preload" alt="" width="50"></div>');
+
+    var myurl = "http://sedam.gotdns.org:8082/SedamWS/SedamService.svc/AlertTypes";
+        
+    jQuery.ajax({
+          type: "GET",
+          url: myurl,
+          dataType: "json",
+          contentType: 'application/json',
+          async: false,
+          success: function (response) {
+            console.log(response);
+            $('#loader').hide();
+
+            var idEventos = [];
+            
+            if(typeof response =='object')
+            {
+                var data = response.AlertTypes;
+                $("#servicios").empty();
+                
+                $.each(data, function(i, field){
+              
+              idEventos.push([field.AtypId]);
+                                 
+                  var listaTipoEventos = '<li>'+
+                    '<a href="#item3" data-id="'+ field.AtypId +'" data-name ="'+field.AtypName+'"class="slide-title e-slide">'+
+                        '<span>' + field.AtypName + '</span>'+
+                        '<img src="img/icons/icon-reclamos.png" alt="" class="iconos">' +
+                    '</a>'+
+                  '</li>';
+                  $(listaTipoEventos).appendTo("#servicios");
+              });
+
+            } 
+            else
+            {
+
+            var errorFormatoData = '<div class="section-title">No es posible mostrar la información por el momento. Por favor intente nuevamente más adelante</div>';
+               $(errorFormatoData).appendTo("#servicios");  
+
+                var errorType = "Respuesta no es en el formato correcto";
+                //alert(errorType);
+                console.log(errorType);
+            }
+
+          }
+          ,
+          error: function (xhr, ajaxOptions, thrownError) {
+            //alert(xhr.status);
+            var errorNoHayServicio = '<div class="section-title">No es posible mostrar la información por el momento. Por favor intente nuevamente más adelante</div>';
+            $(errorNoHayServicio).appendTo("#servicios");  
+            console.log(xhr.status + "Error Lista Tipos de Alertas");
+            console.log(thrownError + "Error Lista Tipos de Alertas");
+            console.log(xhr.responseText + "Error Lista Tipos de Alertas" );
+          }
+        });
+
+  $('.e-slide').on('click', function(){
+    $('#wrapper').scrollTo($(this).attr('href'), 500);    
+    return false;
+  });
+
+  $('a.back').on('click', function () {
+    $('#wrapper').scrollTo($(this).attr('href'), 500);
+    
+    var delDuplicate = $(this).parent().parent().parent().parent().attr('id');
+    console.log("Parent: " + delDuplicate);
+    if(delDuplicate === "item2"){
+      $("#item3, #item4").empty();
+    }
+
+    return false;
+  });
+  
+  $(".slide-title").on('click', function(){
+    window.idAlerta = $(this).attr('data-id');
+    window.nombreAlerta = $(this).attr('data-name');
+        $("#item3").load('ingreso-alerta.html');
+    });
+
+});
+
+</script>
+
+<script type="text/javascript" src="js/search-box.js"></script>
