@@ -1,0 +1,154 @@
+<script type="text/javascript">
+
+$( document ).ready(function() {
+
+  var tramiteId = window.tramiteId;
+  var detailId  = window.detailId;
+
+  var myurlEvento = "http://sedam.gotdns.org:8082/SedamWS/SedamService.svc/TransactionServiceReferences/"+tramiteId+"/";
+  console.log(myurlEvento);
+
+  jQuery.ajax({
+      type: "GET",
+      url: myurlEvento,
+      dataType: "json",
+      contentType: 'application/json',
+      async: false,
+      timeout: 5000,
+      complete: function (responseListaTramites) {                   
+        
+        console.log(responseListaTramites);                  
+
+        var responseDataJson = JSON.parse(responseListaTramites.responseText);
+        var responseData = responseDataJson.Services;
+        
+        console.log(responseData); 
+        if(typeof responseData =='object')
+        {                         
+         
+          //Loop lista de tramites de la organizacion
+          $.each(responseData, function(i, subfield){ 
+          
+              //Valida que el tramite tenga detalle
+              if(typeof subfield.References =='object' && subfield.SvcsId == detailId)
+              {
+                  var detalleTramite = '<div class="fixed-top">'+
+                  '<div class="contain">'+
+                  '<div id="detalle-tramite" class="">' +
+                    '<header class="col-xs-12 top-section">' +
+                      '<a href="#item2" class="back"> </a>' +
+                      '<span>'+                      
+                        '<i class="head-icon aguas"></i>' +
+                        'AGUAS MUNICIPALES'+
+                      '</span>' +
+                    '</header>' +
+                    '</div>'+
+                  '<div id="detail-tramite-' + subfield.SvcsId +'" class="content item-detalle">'+
+                    '<div class="body-wrap">' +
+                      '<div class="col-xs-12 no-padding relative" id="detail-tramite">'+
+                        '<h2>' + subfield.SvcsName + '</h2>'+
+                        '<ul class="striped">';
+
+                  var mapa = "";
+                  var imgTramite = "";
+
+                  //Obtener la coordenadas
+                  var coordenadasDetalle = $.grep(subfield.References, function (element, index) {
+                    return element.RtypName == "Coordenadas";
+                  });                      
+                  if(typeof coordenadasDetalle =='object' && coordenadasDetalle[0]){ 
+                      var coor = coordenadasDetalle[0].SrefValue;
+                  }
+
+                  //Obtener la descripción
+                  var descripcion = $.grep(subfield.References, function (element, index) {
+                    return element.SrefName == "Descripción";
+                  });                      
+                  if(typeof descripcion =='object' && descripcion[0]){ 
+                    detalleTramite =  detalleTramite +
+                      '<li>' + descripcion[0].SrefValue +'</li>';
+                  }
+
+                  //Obtener la dirección 
+                  var direccionDetalle = $.grep(subfield.References, function (element, index) {
+                    return element.RtypName == "Dirección";
+                  });                      
+                  if(typeof direccionDetalle =='object' && direccionDetalle[0]){ 
+                    detalleTramite =  detalleTramite +
+                      '<li>Dirección:</li>'+
+                      '<li><a href="http://maps.apple.com/maps?q=' + coor +'" class="location-link">' + direccionDetalle[0].SrefValue +'</a></li>';                   
+                  }
+
+                  $.each(subfield.References, function(i, detail){ 
+                    if(detail.RtypName == "Imagen"){
+                      imgTramite =  '<img src="http://sedam.gotdns.org:8082/SedamWS/'+ detail.SrefValue +'" class="img-responsive" alt="" />';
+                    }
+                    else if(detail.RtypName != "Coordenadas" && detail.RtypName != "Dirección" && detail.SrefName != "Descripción")
+                    {
+                      detalleTramite =  detalleTramite +
+                        '<li>' + detail.SrefName + '</li>'+
+                        '<li>'+ detail.SrefValue +'</li>';
+                    }
+                  });
+
+                  detalleTramite =  detalleTramite + 
+                      '</ul>'+
+                      '</div>' +
+                    '</div>' +
+                  '</div>' +
+                    '</div>'+
+                  '</div>';
+                  $(detalleTramite).appendTo("#item3");
+                  $(imgTramite).prependTo("#item3 #detail-tramite");
+
+                }//Fin Valida que el centro tenga detalle
+
+            }); //Fin Loop lista de tramites de la organizacion
+
+  } 
+  else
+  {
+
+  var errorFormatoData = '<div class="section-title">No es posible mostrar la información por el momento. Por favor intente nuevamente más adelante</div>';
+     $(errorFormatoData).appendTo("#tramites");  
+
+      var errorType = "Respuesta no es en el formato correcto";
+      //alert(errorType);
+      console.log(errorType);
+  }
+
+}
+,
+error: function (xhr, ajaxOptions, thrownError) {
+  //alert(xhr.status);
+  var errorNoHayServicio = '<div class="section-title">No es posible mostrar la información por el momento. Por favor intente nuevamente más adelante</div>';
+  $(errorNoHayServicio).appendTo("#tramites");  
+  console.log(xhr.status);
+  console.log(thrownError);
+  console.log(xhr.responseText );
+}
+});
+
+
+  $("#detail-tramite-" + detailId).show();
+
+  $('.e-slide').on('click', function(){
+    $('#wrapper').scrollTo($(this).attr('href'), 500);
+    return false;
+  });
+
+  $('a.back').on('click', function () {
+    $('#wrapper').scrollTo($(this).attr('href'), 500);
+    
+    var delDuplicate = $(this).parent().parent().parent().parent().attr('id');
+    
+    if(delDuplicate === "item2"){
+      $("#item3, #item4").empty();
+    }
+
+    return false;
+  });
+
+});
+
+</script>
